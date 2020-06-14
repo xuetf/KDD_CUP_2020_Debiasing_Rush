@@ -1,6 +1,6 @@
-from ..process.recommend_process import *
-from ..process.load_data import *
-from ..process.convert_data import *
+from ...process.recommend_process import *
+from ...process.load_data import *
+from ...process.convert_data import *
 
 
 def filter_df(recom_df, phase, is_item_cnt_weight=False, adjust_type='xtf_v6'):
@@ -38,8 +38,7 @@ def filter_df(recom_df, phase, is_item_cnt_weight=False, adjust_type='xtf_v6'):
 
 def read_sr_gnn_results(phase, prefix='standard', adjust_type='xtf_v6'):
     print('sr-gnn begin...')
-    sr_gnn_rec_path = 'sr-gnn/feat/{}/{}/data/{}_rec.txt'.format(mode, phase,
-                                                                 prefix)  # standard_rec.txt + pos_node_weight_rec.txt
+    sr_gnn_rec_path = '{}/{}/{}_rec.txt'.format(sr_gnn_root_dir, phase, prefix)  # standard_rec.txt + pos_node_weight_rec.txt
     rec_user_item_dict = {}
     with open(sr_gnn_rec_path) as f:
         for line in f:

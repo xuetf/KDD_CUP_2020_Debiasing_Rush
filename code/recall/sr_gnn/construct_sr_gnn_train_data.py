@@ -1,6 +1,6 @@
-from ...conf import *
 from ...process.load_data import *
 from ...process.recommend_process import *
+from ...process.feat_process import *
 from sklearn.preprocessing import LabelEncoder
 import numpy as np
 
@@ -27,7 +27,7 @@ def weighted_agg_content(hist_item_id_list, item_content_vec_dict):
 
 
 def construct_sr_gnn_train_data(target_phase, item_content_vec_dict, is_use_whole_click=True):
-    sr_gnn_dir = '{}/sr-gnn/feat/{}/{}'.format(user_data_dir, mode, target_phase)
+    sr_gnn_dir = '{}/{}'.format(sr_gnn_root_dir, target_phase)
     if not os.path.exists(sr_gnn_dir): os.mkdir(sr_gnn_dir)
     all_click, click_q_time = get_phase_click(target_phase)
     phase_click = all_click
@@ -55,14 +55,14 @@ def construct_sr_gnn_train_data(target_phase, item_content_vec_dict, is_use_whol
     for raw_id, idx in item_raw_id2_idx_dict.items():
         vec = item_content_vec_dict[int(raw_id)]
         item_embed_np[idx, :] = vec
-    np.save(open(sr_gnn_dir + '/data/item_embed_mat.npy', 'wb'), item_embed_np)
+    np.save(open(sr_gnn_dir + '/item_embed_mat.npy', 'wb'), item_embed_np)
 
     user_embed_np = np.zeros((user_cnt + 1, 256))
     for raw_id, idx in user_raw_id2_idx_dict.items():
         hist = user_item_time_hist_dict[int(raw_id)]
         vec = weighted_agg_content(hist, item_content_vec_dict)
         user_embed_np[idx, :] = vec
-    np.save(open(sr_gnn_dir + '/data/user_embed_mat.npy', 'wb'), user_embed_np)
+    np.save(open(sr_gnn_dir + '/user_embed_mat.npy', 'wb'), user_embed_np)
 
     # obtain sequences
     full_user_item_dict = get_user_item_time_dict(phase_click)
@@ -97,7 +97,7 @@ def construct_sr_gnn_train_data(target_phase, item_content_vec_dict, is_use_whol
     print(len(infer_user_hist_seq_dict))
 
     def gen_data(is_attach_user=False):
-        with open(sr_gnn_dir + '/data/train_item_seq.txt', 'w') as f_seq, open(sr_gnn_dir + '/data/train_user_sess.txt',
+        with open(sr_gnn_dir + '/train_item_seq.txt', 'w') as f_seq, open(sr_gnn_dir + '/train_user_sess.txt',
                                                                                'w') as f_user:
             for u in train_users:
                 u_idx = user_raw_id2_idx_dict[str(u)]
@@ -119,7 +119,7 @@ def construct_sr_gnn_train_data(target_phase, item_content_vec_dict, is_use_whol
                 hist_item_user_sess_str = " ".join(hist_item_user_sess)
                 f_user.write(hist_item_user_sess_str + '\n')
 
-        with open(sr_gnn_dir + '/data/test_item_seq.txt', 'w') as f_seq, open(sr_gnn_dir + '/data/test_user_sess.txt',
+        with open(sr_gnn_dir + '/test_item_seq.txt', 'w') as f_seq, open(sr_gnn_dir + '/test_user_sess.txt',
                                                                               'w') as f_user:
             for u in test_users:
                 # test
@@ -148,7 +148,7 @@ def construct_sr_gnn_train_data(target_phase, item_content_vec_dict, is_use_whol
                     hist_item_user_sess_str = " ".join(hist_item_user_sess)
                     f_user.write(hist_item_user_sess_str + '\n')
 
-        with open(sr_gnn_dir + '/data/item_lookup.txt', 'w') as f_item_map:
+        with open(sr_gnn_dir + '/item_lookup.txt', 'w') as f_item_map:
             for raw_id, idx in item_raw_id2_idx_dict.items():
                 f_item_map.write("{} {}\n".format(idx, raw_id))
 
@@ -191,6 +191,8 @@ def construct_sr_gnn_train_data(target_phase, item_content_vec_dict, is_use_whol
         print(tmp_max)
 
     enhance_data(is_attach_user=True)
+
+    return item_cnt
 
 
 
