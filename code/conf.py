@@ -40,7 +40,7 @@ if not os.path.exists(output_path): os.mkdir(output_path)
 recommend_num = 800  # iterate number
 topk_num = 200  # final recall number of each method
 
-sr_gnn_root_dir = os.path.join(user_data_dir,'sr-gnn', mode)
+sr_gnn_root_dir = os.path.join(user_data_dir, 'sr-gnn', mode)
 if not os.path.exists(sr_gnn_root_dir): os.mkdir(sr_gnn_root_dir)
 
 # ranking
