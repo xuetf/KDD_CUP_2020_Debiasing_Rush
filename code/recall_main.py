@@ -46,4 +46,4 @@ if __name__ == '__main__':
 
     # find most popular items
     result = get_predict(total_recom_df, 'sim', top50_click)
-    result.to_csv(output_path + '/recall_result.csv', index=False, header=None)
+    result.to_csv(output_path + '/result.csv', index=False, header=None)

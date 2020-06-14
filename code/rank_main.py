@@ -1,6 +1,6 @@
 from code.rank import *
 from code.process.feat_process import *
-from ..conf import *
+from code.process.convert_data import *
 
 
 def ranking_pipeline(target_phase, output_ranking_filename=None, model_names=['ranker'],
@@ -109,3 +109,6 @@ if __name__ == '__main__':
                          is_infer_load_from_file=True,
                          recall_prefix='B-{}-recall_'.format(today),
                          save_df_prefix='B-{}_'.format(today))
+
+    # ensemble lgb+din
+    ensemble(output_ranking_filename)
