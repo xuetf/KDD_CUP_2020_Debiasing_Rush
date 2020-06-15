@@ -4,6 +4,7 @@ ndcg-full: rank 3rd
 ndcg-half: rank 10th
 
 ## Components of the solution
+python 3.6
 - Recall
     - Item-CF
     - User-CF
