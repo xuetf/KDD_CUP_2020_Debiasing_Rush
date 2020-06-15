@@ -11,7 +11,7 @@ if __name__ == '__main__':
     # obtain content similarity-pairs
     item_feat_df = read_item_feat_df()
     item_content_sim_dict = get_content_sim_item(item_feat_df, topk=200)
-    glv.set("item_content_sim_dict", item_content_sim_dict)
+    glv.set_glv("item_content_sim_dict", item_content_sim_dict)
     print(len(item_content_sim_dict))
 
     top50_click_np, top50_click = obtain_online_top_k_click()

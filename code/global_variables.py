@@ -9,7 +9,7 @@ def init():
     GLOBALS_DICT = {}
 
 
-def set(name, value):
+def set_glv(name, value):
     """设置"""
     try:
         GLOBALS_DICT[name] = value
@@ -18,7 +18,7 @@ def set(name, value):
         return False
 
 
-def get(name):
+def get_glv(name):
     """取值"""
     try:
         return GLOBALS_DICT[name]
