@@ -3,8 +3,6 @@ from tqdm import tqdm
 from collections import defaultdict
 import math
 
-global item_content_sim_dict
-
 
 def make_user_time_tuple(group_df, user_col='user_id', item_col='item_id', time_col='time'):
     user_time_tuples = list(zip(group_df[user_col], group_df[time_col]))
@@ -55,6 +53,7 @@ def get_user_min_time_dict(df, user_col='user_id', item_col='item_id', time_col=
 
 def item_based_recommend(sim_item_corr, user_item_time_dict, user_id, top_k, item_num, alpha=15000,
                          item_cnt_dict=None, user_cnt_dict=None, adjust_type='xtf_v0'):
+    global item_content_sim_dict
     rank = {}
     if user_id not in user_item_time_dict:
         return []
@@ -94,6 +93,7 @@ def item_based_recommend(sim_item_corr, user_item_time_dict, user_id, top_k, ite
 
 def user_based_recommend(sim_user_corr, user_item_time_dict, user_id, top_k, item_num, alpha=15000,
                          item_cnt_dict=None, user_cnt_dict=None, adjust_type='xtf_v6'):
+    global item_content_sim_dict
     rank = {}
     interacted_items = set([i for i, t in user_item_time_dict[user_id]])
     interacted_item_time_list = user_item_time_dict[user_id]
