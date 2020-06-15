@@ -11,7 +11,7 @@ def make_item_sim_tuple(group_df):
 
 def save_recall_df_as_user_tuples_dict(total_recom_df, phase_full_sim_dict, prefix=''):
     save_path = os.path.join(user_data_dir, 'recall', mode)
-    if not os.path.exists(save_path): os.mkdir(save_path)
+    if not os.path.exists(save_path): os.makedirs(save_path)
 
     pickle.dump(total_recom_df, open(os.path.join(save_path, prefix + '_total_recall_df.pkl'), 'wb'))
 

@@ -27,7 +27,7 @@ def weighted_agg_content(hist_item_id_list, item_content_vec_dict):
 def construct_sr_gnn_train_data(target_phase, item_content_vec_dict, is_use_whole_click=True):
 
     sr_gnn_dir = '{}/{}'.format(sr_gnn_root_dir, target_phase)
-    if not os.path.exists(sr_gnn_dir): os.mkdir(sr_gnn_dir)
+    if not os.path.exists(sr_gnn_dir): os.makedirs(sr_gnn_dir)
     all_click, click_q_time = get_phase_click(target_phase)
     phase_click = all_click
     if is_use_whole_click:

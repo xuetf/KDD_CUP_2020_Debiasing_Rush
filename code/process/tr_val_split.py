@@ -4,9 +4,9 @@ import numpy as np
 from ..conf import *
 
 sample_user_num = 1600
-if not os.path.exists(offline_answer_path): os.mkdir(offline_answer_path)
-if not os.path.exists(offline_test_path): os.mkdir(offline_test_path)
-if not os.path.exists(offline_train_path): os.mkdir(offline_train_path)
+if not os.path.exists(offline_answer_path): os.makedirs(offline_answer_path)
+if not os.path.exists(offline_test_path): os.makedirs(offline_test_path)
+if not os.path.exists(offline_train_path): os.makedirs(offline_train_path)
 np.random.seed(1234)  # reproduce-offline
 
 
@@ -33,6 +33,6 @@ def tr_val_split():
                             header=None)
 
         phase_test_path = "{}/{}-{}".format(offline_test_path, test_file_prefix, phase)
-        if not os.path.exists(phase_test_path): os.mkdir(phase_test_path)
+        if not os.path.exists(phase_test_path): os.makedirs(phase_test_path)
         click_test.to_csv(phase_test_path + '/{}-{}.csv'.format(test_file_prefix, phase), index=False, header=None)
         click_qtime.to_csv(phase_test_path + '/{}-{}.csv'.format(infer_file_prefix, phase), index=False, header=None)

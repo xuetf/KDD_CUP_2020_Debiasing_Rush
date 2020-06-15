@@ -35,7 +35,7 @@ def sliding_obtain_training_df(c, is_silding_compute_sim=False):
     click_history_df = all_click
     recall_methods = {'item-cf', 'bi-graph', 'user-cf', 'swing'}
 
-    if not os.path.exists(save_training_path): os.mkdir(save_training_path)
+    if not os.path.exists(save_training_path): os.makedirs(save_training_path)
 
     total_step = 10
     step = 0
@@ -197,7 +197,7 @@ def organize_final_train_data_feat(target_phase, is_train_load_from_file=True, s
     global online_train_full_df_dict, train_full_df_dict, val_full_df_dict, processed_item_feat_df, word2vec_item_embed_dict
 
     ranking_final_data = os.path.join(user_data_dir, 'ranking')
-    if not os.path.exists(ranking_final_data): os.mkdir(ranking_final_data)
+    if not os.path.exists(ranking_final_data): os.makedirs(ranking_final_data)
 
     train_df_path = os.path.join(ranking_final_data, save_df_prefix + 'train_final_df_phase_{}.pkl'.format(target_phase))
     val_df_path = os.path.join(ranking_final_data, save_df_prefix + 'val_final_df_phase_{}.pkl'.format(target_phase))

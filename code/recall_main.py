@@ -20,10 +20,9 @@ if __name__ == '__main__':
     total_recom_df = pd.DataFrame()
     phase_full_sim_dict = {}
 
-    recall_methods = {'item-cf', 'bi-graph', 'swing', 'user-cf'}
-    print(recall_methods | {'sr-gnn'})
+    recall_methods = {'swing'} #{'item-cf', 'bi-graph', 'swing', 'user-cf'}
 
-    for c in range(start_phase, now_phase + 1):
+    for c in range(start_phase, start_phase+1):
         print('phase:', c)
         all_click, click_q_time = get_phase_click(c)
 

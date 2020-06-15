@@ -30,7 +30,7 @@ if __name__ == '__main__':
     for phase in range(start_phase, now_phase+1):
         print('phase={}'.format(phase))
         model_path = 'tmp/model_saved/{}/{}'.format(mode, phase)
-        if not os.path.exists(model_path): os.mkdir(model_path)
+        if not os.path.exists(model_path): os.makedirs(model_path)
 
         file_path = '{}/{}'.format(sr_gnn_root_dir, phase)
         if os.path.exists(model_path):
