@@ -2,12 +2,17 @@ from code.recall.do_recall_multi_processing import *
 from code.process.feat_process import *
 from code.process.convert_data import *
 import time
+import code.global_variables as glv
+
 
 if __name__ == '__main__':
+    glv.init()  # init global variable
+
     # obtain content similarity-pairs
     global item_feat_df, item_content_sim_dict
     item_feat_df = read_item_feat_df()
     item_content_sim_dict = get_content_sim_item(item_feat_df, topk=200)
+    glv.set("item_content_sim_dict", item_content_sim_dict)
     print(len(item_content_sim_dict))
 
     top50_click_np, top50_click = obtain_online_top_k_click()
