@@ -79,3 +79,14 @@ def fill_item_feat(processed_item_feat_df, item_content_vec_dict):
     miss_item_feat_df = miss_item_feat_df[['item_id'] + item_dense_feat]
 
     return miss_item_feat_df, miss_item_content_vec_dict
+
+
+def obtain_entire_item_feat_df():
+    item_feat_df = read_item_feat_df()
+    processed_item_feat_df, _ = process_item_feat(item_feat_df)
+    item_content_vec_dict = dict(zip(processed_item_feat_df['item_id'], processed_item_feat_df[item_dense_feat].values))
+    miss_item_feat_df, miss_item_content_vec_dict = fill_item_feat(processed_item_feat_df, item_content_vec_dict)
+    processed_item_feat_df = processed_item_feat_df.append(miss_item_feat_df)
+    processed_item_feat_df = processed_item_feat_df.reset_index(drop=True)
+    item_content_vec_dict.update(miss_item_content_vec_dict)
+    return processed_item_feat_df, item_content_vec_dict
