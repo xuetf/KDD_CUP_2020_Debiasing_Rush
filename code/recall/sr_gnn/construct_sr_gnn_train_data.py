@@ -4,8 +4,6 @@ from ...process.feat_process import *
 from sklearn.preprocessing import LabelEncoder
 import numpy as np
 
-user_item_time_hist_dict = get_user_item_time_dict(phase_click)
-
 
 def weighted_agg_content(hist_item_id_list, item_content_vec_dict):
     weighted_vec = np.zeros(128*2)
@@ -27,6 +25,7 @@ def weighted_agg_content(hist_item_id_list, item_content_vec_dict):
 
 
 def construct_sr_gnn_train_data(target_phase, item_content_vec_dict, is_use_whole_click=True):
+
     sr_gnn_dir = '{}/{}'.format(sr_gnn_root_dir, target_phase)
     if not os.path.exists(sr_gnn_dir): os.mkdir(sr_gnn_dir)
     all_click, click_q_time = get_phase_click(target_phase)
@@ -34,6 +33,8 @@ def construct_sr_gnn_train_data(target_phase, item_content_vec_dict, is_use_whol
     if is_use_whole_click:
         phase_whole_click = get_whole_phase_click(all_click, click_q_time)
         phase_click = phase_whole_click
+
+    user_item_time_hist_dict = get_user_item_time_dict(phase_click)
 
     # sparse features one-hot
     lbe = LabelEncoder()
