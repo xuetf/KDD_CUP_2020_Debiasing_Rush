@@ -55,7 +55,6 @@ def get_user_min_time_dict(df, user_col='user_id', item_col='item_id', time_col=
 def item_based_recommend(sim_item_corr, user_item_time_dict, user_id, top_k, item_num, alpha=15000,
                          item_cnt_dict=None, user_cnt_dict=None, adjust_type='xtf_v0'):
     item_content_sim_dict = get_glv('item_content_sim_dict')
-    print('item_content_sim_dict num={}'.format(len(item_content_sim_dict)))
     rank = {}
     if user_id not in user_item_time_dict:
         return []
@@ -96,7 +95,6 @@ def item_based_recommend(sim_item_corr, user_item_time_dict, user_id, top_k, ite
 def user_based_recommend(sim_user_corr, user_item_time_dict, user_id, top_k, item_num, alpha=15000,
                          item_cnt_dict=None, user_cnt_dict=None, adjust_type='xtf_v6'):
     item_content_sim_dict = get_glv('item_content_sim_dict')
-    print('item_content_sim_dict num={}'.format(len(item_content_sim_dict)))
 
     rank = {}
     interacted_items = set([i for i, t in user_item_time_dict[user_id]])
