@@ -50,8 +50,9 @@ def read_sr_gnn_results(phase, prefix='standard', adjust_type='xtf_v6'):
                 iids = [(int(iid), float(score)) for iid, score in iids]
                 iids = sorted(iids, key=lambda x: x[1], reverse=True)
                 rec_user_item_dict[int(uid)] = iids
-            except:
-                print(line)
+            except Exception as e:
+                print(e)
+                exit(-1)
     print('read sr-gnn done, num={}'.format(rec_user_item_dict))
     recom_df = recall_dict2df(rec_user_item_dict)
     recom_df['phase'] = phase
