@@ -1,6 +1,7 @@
 import numpy as np
 from collections import defaultdict
 import math
+from tqdm import tqdm
 from ..global_variables import *
 
 
