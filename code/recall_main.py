@@ -9,7 +9,6 @@ if __name__ == '__main__':
     glv.init()  # init global variable
 
     # obtain content similarity-pairs
-    global item_feat_df, item_content_sim_dict
     item_feat_df = read_item_feat_df()
     item_content_sim_dict = get_content_sim_item(item_feat_df, topk=200)
     glv.set("item_content_sim_dict", item_content_sim_dict)
