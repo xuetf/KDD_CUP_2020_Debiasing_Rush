@@ -39,6 +39,7 @@ def filter_df(recom_df, phase, is_item_cnt_weight=False, adjust_type='xtf_v6'):
 def read_sr_gnn_results(phase, prefix='standard', adjust_type='xtf_v6'):
     print('sr-gnn begin...')
     sr_gnn_rec_path = '{}/{}/{}_rec.txt'.format(sr_gnn_root_dir, phase, prefix)  # standard_rec.txt + pos_node_weight_rec.txt
+    print('path={}'.format(sr_gnn_rec_path))
     rec_user_item_dict = {}
     with open(sr_gnn_rec_path) as f:
         for line in f:
