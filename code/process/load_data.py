@@ -4,9 +4,7 @@ import pandas as pd
 
 def obtain_online_top_k_click():
     total_click = get_whole_click()
-    print(total_click.shape)
     total_click = total_click.drop_duplicates(['user_id', 'item_id', 'time'])  # important
-    print(total_click.shape)
     top50_click_np = total_click['item_id'].value_counts().index[:50].values
     top50_click = ','.join([str(i) for i in top50_click_np])
     return top50_click_np, top50_click
@@ -73,7 +71,9 @@ def get_whole_click():
         all_click['phase'] = c
         whole_click = whole_click.append(all_click)
 
+    print(whole_click.shape)
     whole_click = whole_click.drop_duplicates(['user_id', 'item_id', 'time'])
+    print(whole_click.shape)
     return whole_click
 
 
