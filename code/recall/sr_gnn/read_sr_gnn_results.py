@@ -39,20 +39,21 @@ def filter_df(recom_df, phase, is_item_cnt_weight=False, adjust_type='xtf_v6'):
 def read_sr_gnn_results(phase, prefix='standard', adjust_type='xtf_v6'):
     print('sr-gnn begin...')
     sr_gnn_rec_path = '{}/{}/{}_rec.txt'.format(sr_gnn_root_dir, phase, prefix)  # standard_rec.txt + pos_node_weight_rec.txt
-    print('path={}'.format(sr_gnn_rec_path))
     rec_user_item_dict = {}
     with open(sr_gnn_rec_path) as f:
         for line in f:
-            row = eval(line)
-            uid = row[0]
-            iids = row[1]
-            iids = [(int(iid), float(score)) for iid, score in iids]
-            iids = sorted(iids, key=lambda x: x[1], reverse=True)
-            rec_user_item_dict[int(uid)] = iids
-    print('read sr-gnn done, num={}'.format(rec_user_item_dict))
+            try:
+                row = eval(line)
+                uid = row[0]
+                iids = row[1]
+                iids = [(int(iid), float(score)) for iid, score in iids]
+                iids = sorted(iids, key=lambda x: x[1], reverse=True)
+                rec_user_item_dict[int(uid)] = iids
+            except:
+                print(line)
+    print('read sr-gnn done, num={}'.format(len(rec_user_item_dict)))
     recom_df = recall_dict2df(rec_user_item_dict)
     recom_df['phase'] = phase
-    exit(-1)
     recom_df = filter_df(recom_df, phase, is_item_cnt_weight=True, adjust_type=adjust_type)
     recall_user_item_score_dict = recall_df2dict(recom_df)
     return recall_user_item_score_dict

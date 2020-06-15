@@ -6,7 +6,6 @@ import code.global_variables as glv
 
 
 if __name__ == '__main__':
-    standard_sr_gnn_recall_item_dict = read_sr_gnn_results(7, prefix='standard', adjust_type='zjy_v1')
     glv.init()  # init global variable
 
     # obtain content similarity-pairs
@@ -21,7 +20,9 @@ if __name__ == '__main__':
     total_recom_df = pd.DataFrame()
     phase_full_sim_dict = {}
 
-    recall_methods = {'swing'}  # {'item-cf', 'bi-graph', 'swing', 'user-cf'}
+    recall_methods = {'item-cf', 'bi-graph', 'swing', 'user-cf'}
+    print(recall_methods | {'sr-gnn'})
+
     for c in range(start_phase, now_phase + 1):
         print('phase:', c)
         all_click, click_q_time = get_phase_click(c)
@@ -39,7 +40,8 @@ if __name__ == '__main__':
                                                             target_user_ids=click_q_time['user_id'].unique(), ret_type='df',
                                                             item_cnt_dict=item_cnt_dict, user_cnt_dict=user_cnt_dict,
                                                             phase=c, adjust_type='zjy_v1',
-                                                            recall_methods=recall_methods)
+                                                            recall_methods=recall_methods | {'sr-gnn'})
+
         recom_df['phase'] = c
         total_recom_df = total_recom_df.append(recom_df)
 
