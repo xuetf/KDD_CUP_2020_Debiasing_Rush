@@ -52,6 +52,7 @@ def read_sr_gnn_results(phase, prefix='standard', adjust_type='xtf_v6'):
     print('read sr-gnn done, num={}'.format(rec_user_item_dict))
     recom_df = recall_dict2df(rec_user_item_dict)
     recom_df['phase'] = phase
+    exit(-1)
     recom_df = filter_df(recom_df, phase, is_item_cnt_weight=True, adjust_type=adjust_type)
     recall_user_item_score_dict = recall_df2dict(recom_df)
     return recall_user_item_score_dict
