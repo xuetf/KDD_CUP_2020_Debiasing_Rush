@@ -6,6 +6,7 @@ import code.global_variables as glv
 
 
 if __name__ == '__main__':
+    standard_sr_gnn_recall_item_dict = read_sr_gnn_results(7, prefix='standard', adjust_type='zjy_v1')
     glv.init()  # init global variable
 
     # obtain content similarity-pairs
