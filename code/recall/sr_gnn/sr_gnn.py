@@ -55,6 +55,6 @@ if __name__ == '__main__':
                   "--session_input {file_path}/test_user_sess.txt --gru_step 2 "
                   "--hidden_size 256 --batch_size 256 --rec_extra_count 50 --has_uid True "
                   "--feature_init {file_path}/item_embed_mat.npy "
-                  "--max_len 10 --use_norm True --sigma 10 --sq_max_len 5 --node_weight True "
+                  "--max_len 10 --sigma 10 --sq_max_len 5 --node_weight True "
                   "--node_weight_trainable True".format(item_cnt=item_cnt, checkpoint_path=checkpoint_path,
                                                         file_path=file_path, rec_path=rec_path,))

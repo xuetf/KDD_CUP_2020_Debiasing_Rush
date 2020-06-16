@@ -14,7 +14,7 @@ if __name__ == '__main__':
     glv.set_glv("item_content_sim_dict", item_content_sim_dict)
     print(len(item_content_sim_dict))
 
-    top50_click_np, top50_click = obtain_online_top_k_click()
+    top50_click_np, top50_click = obtain_top_k_click()
 
     recom_item = []
     total_recom_df = pd.DataFrame()
@@ -50,6 +50,5 @@ if __name__ == '__main__':
     save_recall_df_as_user_tuples_dict(total_recom_df, phase_full_sim_dict,
                                        prefix='B-recall-{}'.format(today))
 
-    # find most popular items
     result = get_predict(total_recom_df, 'sim', top50_click)
     result.to_csv(output_path + '/result.csv', index=False, header=None)

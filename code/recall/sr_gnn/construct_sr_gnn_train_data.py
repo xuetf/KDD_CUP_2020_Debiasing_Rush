@@ -179,7 +179,7 @@ def construct_sr_gnn_train_data(target_phase, item_content_vec_dict, is_use_whol
 
     enhance_data(is_attach_user=True)
 
-    return item_cnt # item_cnt just return as the input args for SR-GNN
+    return item_cnt  # item_cnt just return as the input args for SR-GNN
 
 
 def weighted_agg_content(hist_item_id_list, item_content_vec_dict):
