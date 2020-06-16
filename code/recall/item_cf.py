@@ -1,3 +1,13 @@
+"""
+Author:
+    Taofeng Xue, xuetfchn@foxmail.com
+
+Reference:
+    [1] A simple itemCF Baseline, score:0.1169(phase0-2): https://tianchi.aliyun.com/forum/postDetail?postId=103530
+    [2] 改进青禹小生baseline，phase3线上0.2: https://tianchi.aliyun.com/forum/postDetail?postId=105787
+"""
+
+
 from ..process.recommend_process import *
 
 

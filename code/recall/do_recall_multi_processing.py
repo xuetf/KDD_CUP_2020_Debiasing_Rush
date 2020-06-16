@@ -60,7 +60,7 @@ def get_multi_source_sim_dict_results_multi_processing(history_df,
 
 
 def do_multi_recall_results_multi_processing(recall_sim_pair_dict, user_item_time_dict, target_user_ids=None,
-                                             ret_type='df', item_cnt_dict=None, user_cnt_dict=None, phase=None, adjust_type='xtf_v6',
+                                             ret_type='df', item_cnt_dict=None, user_cnt_dict=None, phase=None, adjust_type='v2',
                                              recall_methods={'item-cf', 'bi-graph', 'user-cf', 'swing', 'sr-gnn'}):
     from multiprocessing import Process, JoinableQueue, Queue
 

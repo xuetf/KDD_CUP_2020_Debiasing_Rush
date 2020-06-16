@@ -27,7 +27,7 @@ def norm_user_recall_item_dict(recall_item_dict):
 
 
 def get_recall_results(item_sim_dict, user_item_dict, target_user_ids=None, item_based=True,
-                       item_cnt_dict=None, user_cnt_dict=None, adjust_type='xtf_v6'):
+                       item_cnt_dict=None, user_cnt_dict=None, adjust_type='v2'):
     if target_user_ids is None:
         target_user_ids = user_item_dict.keys()
     recall_item_dict = {}
@@ -122,7 +122,7 @@ def get_multi_source_sim_dict_results(history_df, recall_methods={'item-cf', 'bi
 
 def do_multi_recall_results(recall_sim_pair_dict, user_item_time_dict,
                             target_user_ids=None, ret_type='df',
-                            item_cnt_dict=None, user_cnt_dict=None, adjust_type='xtf_v6'):
+                            item_cnt_dict=None, user_cnt_dict=None, adjust_type='v2'):
     if target_user_ids is None:
         target_user_ids = user_item_time_dict.keys()
 

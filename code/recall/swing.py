@@ -1,3 +1,10 @@
+"""
+Author:
+    Taofeng Xue, xuetfchn@foxmail.com
+Reference:
+    http://xtf615.com/2018/05/03/recommender-system-survey/
+"""
+
 from ..process.recommend_process import *
 
 

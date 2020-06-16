@@ -1,3 +1,10 @@
+"""
+Author:
+    Taofeng Xue, xuetfchn@foxmail.com
+Reference:
+    Faiss, A library for efficient similarity search and clustering of dense vectors: https://github.com/facebookresearch/faiss
+"""
+
 import collections
 import pickle
 import faiss
