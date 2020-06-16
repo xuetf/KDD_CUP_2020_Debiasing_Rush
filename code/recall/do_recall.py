@@ -32,7 +32,7 @@ def get_recall_results(item_sim_dict, user_item_dict, target_user_ids=None, item
         target_user_ids = user_item_dict.keys()
     recall_item_dict = {}
 
-    top50_click_np, top50_click = obtain_online_top_k_click()
+    top50_click_np, top50_click = obtain_top_k_click()
 
     print('adjust_type={}'.format(adjust_type))
 

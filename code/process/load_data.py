@@ -2,7 +2,7 @@ from ..conf import *
 import pandas as pd
 
 
-def obtain_online_top_k_click():
+def obtain_top_k_click():
     total_click = get_whole_click()
     total_click = total_click.drop_duplicates(['user_id', 'item_id', 'time'])  # important
     top50_click_np = total_click['item_id'].value_counts().index[:50].values
