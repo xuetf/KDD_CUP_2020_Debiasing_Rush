@@ -1,7 +1,7 @@
 # Solution of KDD CUP 2020 (Debiasing) of Team Rush
 Track B,
-ndcg-full: rank 3rd
-ndcg-half: rank 10th
+ndcg-full: rank 3rd（7.277)
+ndcg-half: rank 10th (7.226)
 
 ## Components of the solution
 python 3.6
