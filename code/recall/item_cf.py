@@ -1,6 +1,6 @@
 """
 Author:
-    Taofeng Xue, xuetfchn@foxmail.com
+    Taofeng Xue, xuetfchn@foxmail.com, xtf615.com
 
 Reference:
     [1] A simple itemCF Baseline, score:0.1169(phase0-2): https://tianchi.aliyun.com/forum/postDetail?postId=103530

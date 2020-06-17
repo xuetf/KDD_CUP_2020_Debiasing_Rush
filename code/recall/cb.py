@@ -1,6 +1,6 @@
 """
 Author:
-    Taofeng Xue, xuetfchn@foxmail.com
+    Taofeng Xue, xuetfchn@foxmail.com, xtf615.com
 Reference:
     Faiss, A library for efficient similarity search and clustering of dense vectors: https://github.com/facebookresearch/faiss
 """

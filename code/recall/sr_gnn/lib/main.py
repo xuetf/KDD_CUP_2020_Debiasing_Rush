@@ -1,3 +1,11 @@
+"""
+Author:
+    Xinzhou Dong
+References:
+[1] Wu S, Tang Y, Zhu Y, et al. Session-based recommendation with graph neural networks[C]//Proceedings of the AAAI Conference on Artificial Intelligence. 2019, 33: 346-353.
+[2] Gupta P, Garg D, Malhotra P, et al. NISER: Normalized Item and Session Representations with Graph Neural Networks[J]. arXiv preprint arXiv:1909.04276, 2019.
+"""
+
 from dataloader import DataLoader
 from model import Model
 import numpy as np
@@ -28,7 +36,7 @@ def calc_mrr(scores, targets, topk=10):
 def run_train(train_path, node_count, checkpoint_path, **kwargs):
     max_test_batch = kwargs.get('max_test_batch', None)
     max_len = kwargs.get('max_len', None)
-    has_uid = kwargs.get("has_uid", False)
+    has_uid = kwargs.get("has_uid", False) # whether has uid in the beginning of
     sq_max_len = kwargs.get('sq_max_len', None)
     train = DataLoader(train_path, max_len=max_len, has_uid=has_uid, sq_max_len=sq_max_len)
     test_path = kwargs.get('test_input', None)

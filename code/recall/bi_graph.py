@@ -1,6 +1,6 @@
 """
 Author:
-    Taofeng Xue, xuetfchn@foxmail.com
+    Taofeng Xue, xuetfchn@foxmail.com, xtf615.com
 
 Reference:
     A Simple Recall Method based on Network-based Inference，score:0.18 (phase0-3): https://tianchi.aliyun.com/forum/postDetail?postId=104936

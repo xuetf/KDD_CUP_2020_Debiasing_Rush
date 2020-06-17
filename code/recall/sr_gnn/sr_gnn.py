@@ -1,3 +1,11 @@
+"""
+Author:
+    Xinzhou Dong, Taofeng Xue
+References:
+[1] Wu S, Tang Y, Zhu Y, et al. Session-based recommendation with graph neural networks[C]//Proceedings of the AAAI Conference on Artificial Intelligence. 2019, 33: 346-353.
+[2] Gupta P, Garg D, Malhotra P, et al. NISER: Normalized Item and Session Representations with Graph Neural Networks[J]. arXiv preprint arXiv:1909.04276, 2019.
+"""
+
 from .construct_sr_gnn_train_data import *
 import sys
 import re

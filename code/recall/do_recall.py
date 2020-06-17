@@ -1,11 +1,10 @@
 from . import *
 
 
-# 基于计算的相似性汇总
 def norm_recall_item_score_list(sorted_recall_item_list):
     if len(sorted_recall_item_list) == 0: return sorted_recall_item_list
 
-    assert sorted_recall_item_list[0][1] >= sorted_recall_item_list[-1][1]  # 稍微check下是否排序的
+    assert sorted_recall_item_list[0][1] >= sorted_recall_item_list[-1][1]  # check whether sorted
     max_sim = sorted_recall_item_list[0][1]
     min_sim = sorted_recall_item_list[-1][1]
 

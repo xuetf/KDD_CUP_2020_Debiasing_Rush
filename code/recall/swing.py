@@ -1,6 +1,6 @@
 """
 Author:
-    Taofeng Xue, xuetfchn@foxmail.com
+    Taofeng Xue, xuetfchn@foxmail.com, xtf615.com
 Reference:
     http://xtf615.com/2018/05/03/recommender-system-survey/
 """
