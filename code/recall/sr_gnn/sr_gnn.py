@@ -32,7 +32,7 @@ if __name__ == '__main__':
         model_path = 'tmp/model_saved/{}/{}'.format(mode, phase)
         if not os.path.exists(model_path): os.makedirs(model_path)
 
-        file_path = '{}/{}'.format(sr_gnn_root_dir, phase)
+        file_path = '{}/{}/data'.format(sr_gnn_root_dir, phase)
         if os.path.exists(model_path):
             print('model_path={} exists, delete'.format(model_path))
             os.system("rm -rf {}".format(model_path))
