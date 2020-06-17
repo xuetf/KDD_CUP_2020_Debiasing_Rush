@@ -13,21 +13,33 @@ Data Fold format
 
 ``
 |-- data
+
 	|-- underexpose_train
+	
 		|-- underexpose_user_feat.csv
+		
 		|-- underexpose_item_feat.csv
+		
 		|-- underexpose_train_click-0.csv
+		
 		|-- underexpose_train_click-1.csv
+		
 		|-- ...
+		
 		|-- underexpose_train_click-9.csv
+		
 	|-- underexpose_test
 		|-- underexpose_test_click-0
+		
 			|-- underexpose_test_qtime-0.csv
 			|-- underexpose_test_click-0.csv
+			
 		|-- underexpose_test_click-1
 			|-- underexpose_test_qtime-1.csv
 			|-- underexpose_test_click-1.csv
+			
 		|-- ...
+		
 		|-- underexpose_test_click-9
 			|-- underexpose_test_qtime-9.csv
 			|-- underexpose_test_click-9.csv
