@@ -37,6 +37,12 @@ def filter_df(recom_df, phase, is_item_cnt_weight=False, adjust_type='v2'):
 
 
 def read_sr_gnn_results(phase, prefix='standard', adjust_type='v2'):
+    '''
+    :param phase: target_phase
+    :param prefix: output name prefix
+    :param adjust_type: re-rank strategy
+    :return: sr-gnn recall results
+    '''
     print('sr-gnn begin...')
     sr_gnn_rec_path = '{}/{}/{}_rec.txt'.format(sr_gnn_root_dir, phase, prefix)  # standard_rec.txt + pos_node_weight_rec.txt
     rec_user_item_dict = {}
