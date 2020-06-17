@@ -132,19 +132,20 @@ def user_based_recommend(sim_user_corr, user_item_time_dict, user_id, top_k, ite
     return rec_items[:item_num]
 
 
-def re_rank(sim, i, u, item_cnt_dict, user_cnt_dict, adjust_type='xtf_v6'):
+def re_rank(sim, i, u, item_cnt_dict, user_cnt_dict, adjust_type='v2'):
     '''
-    re_rank based on the popularity and similarity
-    :param sim:
-    :param i:
-    :param item_cnt_dict:
-    :param adjust_type:
+    :param sim: recall sim value
+    :param i: item
+    :param u: user
+    :param item_cnt_dict: item frequency map
+    :param user_cnt_dict: user frequency map
+    :param adjust_type: re-rank strategy, v0, v1, v2
     :return:
     '''
     if adjust_type is None:
         return sim
-    elif adjust_type == 'xtf_v6':
-        # Log，Linear, 3/4
+    elif adjust_type == 'v1':
+        # Log，Linear, 3/4, only consider item frequency
         if item_cnt_dict.get(i, 1.0) < 4:
             heat = np.log(item_cnt_dict.get(i, 1.0) + 2)
         elif item_cnt_dict.get(i, 1.0) >= 4 and item_cnt_dict.get(i, 1.0) < 10:
@@ -153,7 +154,8 @@ def re_rank(sim, i, u, item_cnt_dict, user_cnt_dict, adjust_type='xtf_v6'):
             heat = item_cnt_dict.get(i, 1.0) ** 0.75 + 5.0  # 3/4
         sim *= 2.0 / heat
 
-    elif adjust_type == 'zjy_v1':
+    elif adjust_type == 'v2':
+        # Log，Linear, 3/4, consider user activity
         user_cnt = user_cnt_dict.get(u, 1.0)
 
         if item_cnt_dict.get(i, 1.0) < 4:
@@ -166,14 +168,13 @@ def re_rank(sim, i, u, item_cnt_dict, user_cnt_dict, adjust_type='xtf_v6'):
             else:
                 heat = item_cnt_dict.get(i, 1.0) * 1.6
         else:
-            # heat = item_cnt_dict.get(i, 1.0) ** 0.75 + 5.0 # 3/4
             if user_cnt > 50:
                 user_cnt_k = 0.4
             elif user_cnt > 10:
                 user_cnt_k = 0.1
             else:
                 user_cnt_k = 0
-            heat = item_cnt_dict.get(i, 1.0) ** user_cnt_k + 10 - 10 ** user_cnt_k  # 3/4
+            heat = item_cnt_dict.get(i, 1.0) ** user_cnt_k + 10 - 10 ** user_cnt_k
         sim *= 2.0 / heat
 
     else:
