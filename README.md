@@ -63,11 +63,11 @@ Data Fold format
 python 3.6, tensorflow 1.14.0
  
 ## Running
-- ./run.sh
+- ```./run.sh```
 
 If you just want to do recalls: 
-- sr-gnn recall (single model recall): python3 code/sr_gnn_main.py
-- recall pipeline(CF + read SR-GNN): python3 code/recall_main.py
+- sr-gnn recall (single model recall): ```python3 code/sr_gnn_main.py```
+- recall pipeline(CF + read SR-GNN): ```python3 code/recall_main.py```
 
 
 The recall code is well checked.
