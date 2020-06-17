@@ -1,4 +1,4 @@
-# Solution of KDD CUP 2020 (Debiasing) of Team Rush
+# Solution to Debiasing of KDD CUP 2020 (Team Rush)
 Track B,
 
 - ndcg-full: **rank 3rd**（7.277)
