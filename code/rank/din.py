@@ -1,3 +1,11 @@
+"""
+Author:
+    Taofeng Xue, xuetfchn@foxmail.com
+Reference:
+    DeepCTR, Easy-to-use,Modular and Extendible package of deep-learning based CTR models, https://github.com/shenweichen/DeepCTR
+"""
+
+
 from ..process.load_data import *
 from ..process.recommend_process import *
 from tensorflow.python.keras.layers import Dense,Concatenate

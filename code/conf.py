@@ -22,8 +22,8 @@ item_feat_file_path = os.path.join(online_train_path, 'underexpose_item_feat.csv
 user_feat_file_path = os.path.join(online_train_path, 'underexpose_user_feat.csv')
 
 
-# global variables to control online or offline
-
+# recall: global variables to control online or offline
+is_multi_processing = True
 mode = 'online'
 now_phase = 9
 start_phase = 7
@@ -42,6 +42,7 @@ topk_num = 200  # final recall number of each method
 
 sr_gnn_root_dir = os.path.join(user_data_dir, 'sr-gnn', mode)
 if not os.path.exists(sr_gnn_root_dir): os.makedirs(sr_gnn_root_dir)
+
 
 # ranking
 w2v_dim = 32

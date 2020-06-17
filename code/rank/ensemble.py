@@ -34,7 +34,7 @@ def ensemble(output_ranking_filename):
     din_lgb_full_df = lgb_ranker_df.append(din_df)
     din_lgb_full_df = din_lgb_full_df.groupby(['user_id', 'item_id', 'phase'])['sim'].sum().reset_index()
 
-    online_top50_click_np, online_top50_click = obtain_online_top_k_click()
+    online_top50_click_np, online_top50_click = obtain_top_k_click()
     res3 = get_predict(din_lgb_full_df, 'sim', online_top50_click)
     res3.to_csv(output_path + '/result.csv', index=False, header=None)
 
