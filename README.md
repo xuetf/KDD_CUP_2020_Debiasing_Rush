@@ -70,15 +70,16 @@ python 3.6, tensorflow 1.14.0
 ## Running
 - pipeline: ```./run.sh```
 
-If you just want to : 
+If you just want to run some parts of our solution: 
 - sr-gnn recall (single model recall): ```python3 code/sr_gnn_main.py```
 - recall pipeline (CF + read SR-GNN): ```python3 code/recall_main.py```
 - ranking pipeline (GBDT + DIN): ```python3 code/rank_main.py``` 
 
-Notebook:
-- notebook/Rush_0615.ipynb:  you can run the notebook step by step!!
+Or if you want to run step by step in Notebook:
+- notebook/Rush_0615.ipynb
 
-The recall code and sr-gnn code are well checked.
+Note:
+The recall code and sr-gnn code are well checked. you can run both in py or notebook.
 The ranking code is not well checked now, we will double-check the code as soon as possible.
  
 ## References
