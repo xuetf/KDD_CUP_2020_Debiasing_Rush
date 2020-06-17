@@ -4,6 +4,35 @@ Track B,
 - ndcg-full: **rank 3rd**（7.277)
 - ndcg-half: **rank 10th** (7.226)
 
+## Introduction 
+
+https://tianchi.aliyun.com/competition/entrance/231785/introduction
+
+## Data
+Data Fold format
+
+``
+|-- data
+	|-- underexpose_train
+		|-- underexpose_user_feat.csv
+		|-- underexpose_item_feat.csv
+		|-- underexpose_train_click-0.csv
+		|-- underexpose_train_click-1.csv
+		|-- ...
+		|-- underexpose_train_click-9.csv
+	|-- underexpose_test
+		|-- underexpose_test_click-0
+			|-- underexpose_test_qtime-0.csv
+			|-- underexpose_test_click-0.csv
+		|-- underexpose_test_click-1
+			|-- underexpose_test_qtime-1.csv
+			|-- underexpose_test_click-1.csv
+		|-- ...
+		|-- underexpose_test_click-9
+			|-- underexpose_test_qtime-9.csv
+			|-- underexpose_test_click-9.csv
+``
+
 ## Key Points of Our Solution 
 - **The construction of the recall training set**, how to use the ENTIRE data for training is important. we need to prevent data crossing from both the user side and the item side. This improvement is very significant, indicating that the data have a great impact on the results.
 
@@ -18,7 +47,6 @@ Track B,
 - **Ensemble ranking model**: the fusion of Tree-based model, i.e., GBDT and Deep-Learning-based model, i.e., DIN can effectively improve the ranking results
 
 ## Components of the solution
-python 3.6
 - Recall
     - Item-CF
     - User-CF
@@ -30,6 +58,9 @@ python 3.6
     - LGB
     - DIN
     
+## Environment
+python 3.6, tensorflow 1.14.0
+ 
 ## Running
 - ./run.sh
 
