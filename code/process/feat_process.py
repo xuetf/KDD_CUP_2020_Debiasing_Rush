@@ -23,8 +23,7 @@ def process_item_feat(item_feat_df):
     processed_item_feat_df[txt_dense_feat] = pd.DataFrame(txt_item_feat_np, columns=txt_dense_feat)
     processed_item_feat_df[img_dense_feat] = pd.DataFrame(img_item_feat_np, columns=img_dense_feat)
 
-    # item_feat_dict = dict(zip(processed_item_feat_df['item_id'], processed_item_feat_df[dense_feat].values))
-    return processed_item_feat_df, dense_feat
+    return processed_item_feat_df
 
 
 def fill_item_feat(processed_item_feat_df, item_content_vec_dict):
@@ -83,7 +82,7 @@ def fill_item_feat(processed_item_feat_df, item_content_vec_dict):
 
 def obtain_entire_item_feat_df():
     item_feat_df = read_item_feat_df()
-    processed_item_feat_df, _ = process_item_feat(item_feat_df)
+    processed_item_feat_df = process_item_feat(item_feat_df)
     item_content_vec_dict = dict(zip(processed_item_feat_df['item_id'], processed_item_feat_df[item_dense_feat].values))
     miss_item_feat_df, miss_item_content_vec_dict = fill_item_feat(processed_item_feat_df, item_content_vec_dict)
     processed_item_feat_df = processed_item_feat_df.append(miss_item_feat_df)
