@@ -65,9 +65,14 @@ python 3.6, tensorflow 1.14.0
 ## Running
 - ./run.sh
 
+If you just want to do recalls: 
+- sr-gnn recall (single model recall): python3 code/sr_gnn_main.py
+- recall pipeline(CF + read SR-GNN): python3 code/recall_main.py
+
+
 The recall code is well checked.
 The ranking code is not well checked now, we will double-check the code as soon as possible.
-    
+ 
 ## References
 
 [1]  Wu S, Tang Y, Zhu Y, et al. Session-based recommendation with graph neural networks[C]//Proceedings of the AAAI Conference on Artificial Intelligence. 2019, 33: 346-353.
