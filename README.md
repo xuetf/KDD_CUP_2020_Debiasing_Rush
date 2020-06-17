@@ -5,17 +5,17 @@ Track B,
 - ndcg-half: **rank 10th** (7.226)
 
 ## Key Points of this Solution 
-- The construction of the recall training set, how to use the ENTIRE data for training is important. we need to prevent data crossing from both the user side and the item side. This improvement is very significant, indicating that the data have a great impact on the results.
+- **The construction of the recall training set**, how to use the ENTIRE data for training is important. we need to prevent data crossing from both the user side and the item side. This improvement is very significant, indicating that the data have a great impact on the results.
 
-- Improvements in CF methods can effectively debias the data, including interaction time, direction, content similarity, item popularity, user activity, etc. This improvement is also very significant and suits the topic of the game, i.e., Debiasing.
+- **Improvements in CF methods** can effectively debias the data, including interaction time, direction, content similarity, item popularity, user activity, etc. This improvement is also very significant and suits the topic of the game, i.e., Debiasing.
 
-- SR-GNN is designed for sequential recommendation based on the graph neural networks, which perfectly suits the scenario of this competition. SR-GNN captures the high-order proximity between items and takes into account the user's long-term and short-term preferences. In addition, we improve SR-GNN in many ways, i.e., we use content features for embedding initialization, introducing node weights according to frequency (for debiasing), position embedding (enhance short-term interaction importance), embedding L2 normalization, residual connection, the sequence-level embedding construction. The improvement of the SR-GNN reaches more than 0.05+ in terms of full-ndcg.
+- **SR-GNN** is designed for sequential recommendation based on the graph neural networks, which perfectly suits the scenario of this competition. SR-GNN captures the high-order proximity between items and takes into account the user's long-term and short-term preferences. In addition, we improve SR-GNN in many ways, i.e., we use content features for embedding initialization, introducing node weights according to frequency (for debiasing), position embedding (enhance short-term interaction importance), embedding L2 normalization, residual connection, the sequence-level embedding construction. The improvement of the SR-GNN reaches more than 0.05+ in terms of full-ndcg.
 
-- The coarse-grained ranking considers the frequency of items and motivate the exposure of low-frequency items to effectively debias, which significantly improves the half metrics.
+- **The coarse-grained ranking** considers the frequency of items and motivate the exposure of low-frequency items to effectively debias, which significantly improves the half metrics.
 
-- Construction of ranking features, including recall features, content features, historical behavior-related features, ID features, etc.
+- **Construction of ranking features**, including recall features, content features, historical behavior-related features, ID features, etc.
 
-- Ensemble model: the fusion of Tree-based model, i.e., GBDT and Deep-Learning-based model, i.e., DIN can effectively improve the ranking results
+- **Ensemble ranking model**: the fusion of Tree-based model, i.e., GBDT and Deep-Learning-based model, i.e., DIN can effectively improve the ranking results
 
 ## Components of the solution
 python 3.6
