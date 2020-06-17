@@ -75,6 +75,8 @@ If you just want to :
 - recall pipeline (CF + read SR-GNN): ```python3 code/recall_main.py```
 - ranking pipeline (GBDT + DIN): ```python3 code/rank_main.py``` 
 
+Notebook:
+- notebook/Rush_0615.ipynb:  you can run the notebook step by step!!
 
 The recall code and sr-gnn code are well checked.
 The ranking code is not well checked now, we will double-check the code as soon as possible.
