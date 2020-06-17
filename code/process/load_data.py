@@ -82,7 +82,7 @@ def get_whole_phase_click(all_click, click_q_time):
     get train data for target phase (i.e., all_click) from whole click
     :param all_click: the click data of target phase
     :param click_q_time: the infer q_time of target phase
-    :return:
+    :return: the filtered whole click data for target phase
     '''
     whole_click = get_whole_click()
 
