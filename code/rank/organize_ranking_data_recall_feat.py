@@ -1,7 +1,6 @@
 from ..conf import *
 import pandas as pd
-
-global item_content_sim_dict
+from ..global_variables import *
 
 
 def obtain_user_hist_feat(u, user_item_dict):
@@ -13,6 +12,8 @@ def obtain_user_hist_feat(u, user_item_dict):
 
 
 def organize_recall_feat_each_user(u, recall_items, user_item_dict, strategy_item_sim_dict, phase):
+    item_content_sim_dict = get_glv('item_content_sim_dict')
+
     user_hist_info = obtain_user_hist_feat(u, user_item_dict)
 
     # hist-item similarity with recall items

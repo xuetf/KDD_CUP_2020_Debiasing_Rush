@@ -3,9 +3,7 @@ from ..conf import *
 import tensorflow as tf
 import numpy as np
 import pandas as pd
-
-
-global item_content_vec_dict
+from ..global_variables import *
 
 
 def get_word2vec_feat(full_user_item_df):
@@ -26,9 +24,7 @@ def get_word2vec_feat(full_user_item_df):
 
 
 def sparse_feat_fit(total_click):
-    global feat_lbe_dict, item_raw_id2_idx_dict, user_raw_id2_idx_dict
-
-    from sklearn.preprocessing import LabelEncoder, MinMaxScaler
+    from sklearn.preprocessing import LabelEncoder
     # sparse features one-hot
     feat_lbe_dict = {}
     for feat in sparse_feat:
@@ -39,10 +35,15 @@ def sparse_feat_fit(total_click):
 
     item_raw_id2_idx_dict = dict(zip(feat_lbe_dict['item_id'].classes_,
                                      feat_lbe_dict['item_id'].transform(
-                                         feat_lbe_dict['item_id'].classes_) + 1, ))  # 得到字典
+                                         feat_lbe_dict['item_id'].classes_) + 1, ))  # get dictionary
     user_raw_id2_idx_dict = dict(zip(feat_lbe_dict['user_id'].classes_,
                                      feat_lbe_dict['user_id'].transform(
-                                         feat_lbe_dict['user_id'].classes_) + 1, ))  # 得到字典
+                                         feat_lbe_dict['user_id'].classes_) + 1, ))  # get dictionary
+    set_glv('feat_lbe_dict', feat_lbe_dict)
+    set_glv('item_raw_id2_idx_dict', item_raw_id2_idx_dict)
+    set_glv('user_raw_id2_idx_dict', user_raw_id2_idx_dict)
+
+
 
 
 def sparse_feat_transform(df):
@@ -70,6 +71,8 @@ def fillna(df, sparse_feat, dense_feat):
 
 def organize_user_item_feat(df, item_feat_df, sparse_feat, dense_feat,
                             is_interest=True, is_w2v=False, word2vec_item_embed_dict=None):
+    item_content_vec_dict = get_glv('item_content_vec_dict')
+
     full_user_item_df = pd.merge(df, item_feat_df, how='left', on='item_id')
     full_user_item_df = fillna(full_user_item_df, sparse_feat, dense_feat)
     print('origin data done')
@@ -89,6 +92,8 @@ def organize_user_item_feat(df, item_feat_df, sparse_feat, dense_feat,
 
 
 def obtain_user_hist_interest_feat(full_user_item_df, item_vec_dict):
+    item_content_vec_dict = get_glv('item_content_vec_dict')
+
     def weighted_agg_content(hist_item_id_list):
 
         weighted_content = np.zeros(128 * 2)

@@ -1,6 +1,7 @@
 from code.rank import *
 from code.process.feat_process import *
 from code.process.convert_data import *
+import code.global_variables as glv
 
 
 def ranking_pipeline(target_phase, output_ranking_filename=None, model_names=['ranker'],
@@ -52,25 +53,20 @@ def ranking_pipeline(target_phase, output_ranking_filename=None, model_names=['r
 
 
 if __name__ == '__main__':
-    global item_feat_df, item_content_sim_dict
-
+    glv.init()
     item_feat_df = read_item_feat_df()
     item_content_sim_dict = get_content_sim_item(item_feat_df, topk=200)
     print(len(item_content_sim_dict))
+    glv.set_glv("item_content_sim_dict", item_content_sim_dict)
 
     # 1. construct ranking data, this will take a bit long time !!!
     for i in range(start_phase, now_phase + 1):
         sliding_obtain_training_df(i, is_silding_compute_sim=True)
 
-    # 2. process feat
-    processed_item_feat_df, item_dense_feat = process_item_feat(item_feat_df)
-    item_content_vec_dict = dict(zip(processed_item_feat_df['item_id'], processed_item_feat_df[item_dense_feat].values))
-
-    # fill missing item info
-    miss_item_feat_df, miss_item_content_vec_dict = fill_item_feat(processed_item_feat_df, item_content_vec_dict)
-    processed_item_feat_df = processed_item_feat_df.append(miss_item_feat_df)
-    processed_item_feat_df = processed_item_feat_df.reset_index(drop=True)
-    item_content_vec_dict.update(miss_item_content_vec_dict)
+    # 2. process feat, fill in unseen items
+    processed_item_feat_df, item_content_vec_dict = obtain_entire_item_feat_df()
+    glv.set_glv("processed_item_feat_df", processed_item_feat_df)
+    glv.set_glv("item_content_vec_dict", item_content_vec_dict)
 
     # encoder sparse id feat
     online_total_click = get_online_whole_click()
@@ -85,6 +81,7 @@ if __name__ == '__main__':
             online_train_full_df = organize_train_data_multi_processing(i, is_silding_compute_sim=True,
                                                                         load_from_file=True)
             online_train_full_df_dict[i] = online_train_full_df
+        glv.set_glv("online_train_full_df_dict", online_train_full_df_dict)
     else:
         train_full_df_dict = {}
         val_full_df_dict = {}
@@ -94,10 +91,11 @@ if __name__ == '__main__':
                                                                                                load_from_file=True)
             train_full_df_dict[i] = train_full_df
             val_full_df_dict[i] = val_full_df
+        glv.set_glv("train_full_df_dict", train_full_df_dict)
+        glv.set_glv("val_full_df_dict", val_full_df_dict)
 
     global total_recom_lgb_df
-    recall_res_path = os.path.join(output_path + 'recall_result.csv')
-    total_recom_lgb_df = sub2_df(recall_res_path)
+    total_recom_lgb_df = sub2_df(os.path.join(output_path + 'recall_result.csv'))
 
     today = time.strftime("%Y%m%d")
     output_ranking_filename = "B-ranking-{}".format(today)

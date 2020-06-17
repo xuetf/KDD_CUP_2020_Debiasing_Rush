@@ -20,9 +20,13 @@ from deepctr.inputs import SparseFeat, DenseFeat, get_feature_names, VarLenSpars
 from tensorflow.python.keras.models import Model
 import tensorflow as tf
 tf.set_random_seed(1234)
+from ..global_variables import *
 
 
-global item_raw_id2_idx_dict, user_raw_id2_idx_dict, item_content_vec_dict, user_embed_np, feat_lbe_dict
+item_raw_id2_idx_dict = get_glv('item_raw_id2_idx_dict')
+user_raw_id2_idx_dict = get_glv('user_raw_id2_idx_dict')
+item_content_vec_dict = get_glv('item_content_vec_dict')
+feat_lbe_dict = get_glv('feat_lbe_dict')
 
 item_cnt = len(item_raw_id2_idx_dict)
 item_embed_np = np.zeros((item_cnt+1, 256))
@@ -32,6 +36,7 @@ for raw_id, idx in item_raw_id2_idx_dict.items():
 
 
 def get_init_user_embed(target_phase, is_use_whole_click=True):
+    global user_embed_np
     all_click, click_q_time = get_phase_click(target_phase)
     if is_use_whole_click:
         phase_click = get_whole_phase_click(all_click, click_q_time)
@@ -79,6 +84,8 @@ def kdd_create_embedding_matrix(feature_columns, l2_reg, init_std, seed, prefix=
 
 def kdd_create_embedding_dict(sparse_feature_columns, varlen_sparse_feature_columns, init_std, seed, l2_reg,
                           prefix='sparse_', seq_mask_zero=True):
+    global user_embed_np, item_embed_np
+
     sparse_embedding = {}
     for feat in sparse_feature_columns:
         embed_initializer = RandomNormal(mean=0.0, stddev=init_std, seed=seed)

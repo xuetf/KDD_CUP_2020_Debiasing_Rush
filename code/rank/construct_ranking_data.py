@@ -4,6 +4,7 @@ from .organize_ranking_data_label import *
 from ..process.load_data import *
 from .organize_ranking_data_info_feat import *
 from ..conf import *
+from ..global_variables import *
 
 
 def get_history_and_last_click_df(click_df):
@@ -194,7 +195,13 @@ def organize_train_data_multi_processing(c, is_silding_compute_sim=False, load_f
 
 
 def organize_final_train_data_feat(target_phase, is_train_load_from_file=True, save_df_prefix=''):
-    global online_train_full_df_dict, train_full_df_dict, val_full_df_dict, processed_item_feat_df, word2vec_item_embed_dict
+    if mode == 'online':
+        online_train_full_df_dict = get_glv('online_train_full_df_dict')
+    else:
+        train_full_df_dict = get_glv('train_full_df_dict')
+        val_full_df_dict = get_glv('val_full_df_dict')
+
+    processed_item_feat_df = get_glv('processed_item_feat_df')
 
     ranking_final_data = os.path.join(user_data_dir, 'ranking')
     if not os.path.exists(ranking_final_data): os.makedirs(ranking_final_data)
@@ -207,6 +214,7 @@ def organize_final_train_data_feat(target_phase, is_train_load_from_file=True, s
         print('load train from file...')
         train_final_df = pickle.load(open(train_df_path, 'rb'))
         word2vec_item_embed_dict = pickle.load(open(w2v_path, 'rb'))
+        set_glv('word2vec_item_embed_dict', word2vec_item_embed_dict)
         if mode == 'offline':
             val_final_df = pickle.load(open(val_df_path, 'rb'))
             return train_final_df, val_final_df
@@ -221,6 +229,7 @@ def organize_final_train_data_feat(target_phase, is_train_load_from_file=True, s
             val_full_df = val_full_df_dict[target_phase]
 
         word2vec_item_embed_dict = get_word2vec_feat(train_full_df)
+        set_glv('word2vec_item_embed_dict', word2vec_item_embed_dict)
         train_final_df = organize_user_item_feat(train_full_df, processed_item_feat_df,
                                                  sparse_feat, dense_feat,
                                                  is_w2v=True, word2vec_item_embed_dict=word2vec_item_embed_dict)
@@ -238,12 +247,11 @@ def organize_final_train_data_feat(target_phase, is_train_load_from_file=True, s
         return train_final_df
 
 
-def infer_process(phase, load_from_file=True, is_sliding_compute_sim=True, is_use_whole_click=True,
+def infer_process(phase, load_from_file=True, is_use_whole_click=False,
                   is_w2v=True, is_interest=True, word2vec_item_embed_dict=None, prefix=''):
-    all_click, target_infer_user_df = get_phase_click(phase)
+    all_click, target_infer_user_df = get_phase_click(c)
 
     recall_methods = {'item-cf', 'bi-graph', 'user-cf', 'swing'}
-    recall_sr_gnn_methods = {'item-cf', 'bi-graph', 'user-cf', 'swing', 'sr-gnn'}
     if is_use_whole_click:
         print('use whole click')
         phase_whole_click = get_whole_phase_click(all_click, target_infer_user_df)
@@ -253,13 +261,12 @@ def infer_process(phase, load_from_file=True, is_sliding_compute_sim=True, is_us
         infer_user_item_time_dict = get_user_item_time_dict(all_click)
         phase_click = all_click
 
-    compute_mode = 'multi' if is_sliding_compute_sim else 'once'
-    save_training_path = os.path.join(user_data_dir, 'training', mode, compute_mode, str(phase))
-    if load_from_file:
-        sim_path = os.path.join(save_training_path, prefix + 'full_sim_pair_dict.pkl')
-        recall_path = os.path.join(save_training_path, prefix + 'val_user_recall_item_dict.pkl')
-        print('load recall info from file begin, recall_path={}'.format(recall_path))
+    save_training_path = os.path.join(user_data_dir, 'recall', mode)
+    sim_path = os.path.join(save_training_path, prefix + '_phase_{}_sim.pkl'.format(phase))
+    recall_path = os.path.join(save_training_path, prefix + '_phase_{}.pkl'.format(phase))
 
+    if load_from_file:
+        print('load recall info from file begin, recall_path={}'.format(recall_path))
         full_sim_pair_dict = pickle.load(open(sim_path, 'rb'))
         infer_user_recall_item_dict = pickle.load(open(recall_path, 'rb'))
         print('load recall info from file done')
@@ -272,13 +279,13 @@ def infer_process(phase, load_from_file=True, is_sliding_compute_sim=True, is_us
         infer_user_recall_item_dict = do_multi_recall_results_multi_processing(full_sim_pair_dict,
                                                                                infer_user_item_time_dict,
                                                                                target_user_ids=target_infer_user_df['user_id'].unique(),
-                                                                               ret_type='tuple',
-                                                                               item_cnt_dict=item_cnt_dict, user_cnt_dict=user_cnt_dict,
-                                                                               phase=phase, recall_methods=recall_sr_gnn_methods)
-
-        pickle.dump(full_sim_pair_dict, open(os.path.join(save_training_path, 'full_sim_pair_dict.pkl'), 'wb'))
-        pickle.dump(infer_user_recall_item_dict,
-                    open(os.path.join(save_training_path, 'val_user_recall_item_dict.pkl'), 'wb'))
+                                                                               ret_type='tuple', phase=phase,
+                                                                               item_cnt_dict=item_cnt_dict,
+                                                                               user_cnt_dict=user_cnt_dict,
+                                                                               adjust_type='v2',
+                                                                               recall_methods=recall_methods | {'sr-gnn'})
+        pickle.dump(full_sim_pair_dict, open(sim_path, 'wb'))
+        pickle.dump(infer_user_recall_item_dict, open(recall_path, 'wb'))
 
     infer_recall_recom_df = organize_recall_feat(infer_user_recall_item_dict, infer_user_item_time_dict,
                                                  full_sim_pair_dict, phase)
@@ -289,14 +296,14 @@ def infer_process(phase, load_from_file=True, is_sliding_compute_sim=True, is_us
                                      on='user_id', how='left')
 
     infer_final_df = organize_user_item_feat(infer_recall_recom_df, processed_item_feat_df,
-                                             sparse_feat, dense_feat, is_w2v=is_w2v, is_interest=is_interest,
-                                             word2vec_item_embed_dict=word2vec_item_embed_dict)
+                                             sparse_feat, dense_feat, is_interest=is_interest,
+                                             is_w2v=is_w2v,word2vec_item_embed_dict=word2vec_item_embed_dict)
 
     return infer_recall_recom_df, infer_final_df
 
 
 def organize_infer_data(target_phase, save_df_prefix, recall_prefix, is_infer_load_from_file=True):
-    global word2vec_item_embed_dict
+    word2vec_item_embed_dict = get_glv('word2vec_item_embed_dict')
     ranking_final_data = os.path.join(user_data_dir, 'ranking')
     infer_df_path = os.path.join(ranking_final_data, save_df_prefix + recall_prefix + 'infer_final_df_phase_{}.pkl'.format(target_phase))
 
@@ -305,7 +312,7 @@ def organize_infer_data(target_phase, save_df_prefix, recall_prefix, is_infer_lo
         infer_recall_recom_df, infer_df = pickle.load(open(infer_df_path, 'rb'))
     else:
         infer_recall_recom_df, infer_df = infer_process(target_phase, load_from_file=True,
-                                                        is_sliding_compute_sim=True, is_use_whole_click=True,
+                                                        is_use_whole_click=True,
                                                         prefix=recall_prefix, is_interest=True,
                                                         is_w2v=True, word2vec_item_embed_dict=word2vec_item_embed_dict)
         pickle.dump([infer_recall_recom_df, infer_df[use_feats]], open(infer_df_path, 'wb'))
