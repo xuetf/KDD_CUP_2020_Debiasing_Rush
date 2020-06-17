@@ -38,7 +38,7 @@ if __name__ == '__main__':
         recom_df = do_multi_recall_results_multi_processing(recall_sim_pair_dict, user_item_time_dict,
                                                             target_user_ids=click_q_time['user_id'].unique(), ret_type='df',
                                                             item_cnt_dict=item_cnt_dict, user_cnt_dict=user_cnt_dict,
-                                                            phase=c, adjust_type='zjy_v1',
+                                                            phase=c, adjust_type='v2',
                                                             recall_methods=recall_methods | {'sr-gnn'})
 
         recom_df['phase'] = c

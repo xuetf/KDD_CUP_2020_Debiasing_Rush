@@ -8,7 +8,7 @@ import numpy as np
 def construct_sr_gnn_train_data(target_phase, item_content_vec_dict, is_use_whole_click=True):
 
     # step 1: obtain original training data
-    sr_gnn_dir = '{}/{}'.format(sr_gnn_root_dir, target_phase)
+    sr_gnn_dir = '{}/{}/data'.format(sr_gnn_root_dir, target_phase)
     if not os.path.exists(sr_gnn_dir): os.makedirs(sr_gnn_dir)
     all_click, click_q_time = get_phase_click(target_phase)
     phase_click = all_click
@@ -146,8 +146,8 @@ def construct_sr_gnn_train_data(target_phase, item_content_vec_dict, is_use_whol
         count = 0
         max_len = 10
         tmp_max = 0
-        with open(sr_gnn_dir + '/data/train_item_seq.txt', 'r') as f_in, open(
-                sr_gnn_dir + '/data/train_item_seq_enhanced.txt', 'w') as f_out:
+        with open(sr_gnn_dir + '/train_item_seq.txt', 'r') as f_in, open(
+                sr_gnn_dir + '/train_item_seq_enhanced.txt', 'w') as f_out:
             for line in f_in:
                 row = line.strip().split()
 
