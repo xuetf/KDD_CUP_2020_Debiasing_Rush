@@ -121,8 +121,9 @@ def get_multi_source_sim_dict_results(history_df, recall_methods={'item-cf', 'bi
 
 
 def do_multi_recall_results(recall_sim_pair_dict, user_item_time_dict,
-                            target_user_ids=None, ret_type='df',
-                            item_cnt_dict=None, user_cnt_dict=None, adjust_type='v2'):
+                            target_user_ids=None, ret_type='df', phase=None,
+                            item_cnt_dict=None, user_cnt_dict=None,
+                            adjust_type='v2', recall_methods={'item-cf', 'bi-graph', 'user-cf', 'swing', 'sr-gnn'}):
     if target_user_ids is None:
         target_user_ids = user_item_time_dict.keys()
 
@@ -141,13 +142,16 @@ def do_multi_recall_results(recall_sim_pair_dict, user_item_time_dict,
         print('{} recall done, recall_user_num={}.'.format(name, len(recall_item_dict)))
         recall_item_list_dict[name] = recall_item_dict
 
-    standard_sr_gnn_recall_item_dict = read_sr_gnn_results(phase, prefix='standard',
-                                                           adjust_type=adjust_type)
-    pos_weight_sr_gnn_recall_item_dict = read_sr_gnn_results(phase, prefix='pos_node_weight',
-                                                             adjust_type=adjust_type)
+    if 'sr-gnn' in recall_methods:
+        standard_sr_gnn_recall_item_dict = read_sr_gnn_results(phase, prefix='standard',
+                                                               adjust_type=adjust_type)
+        print('read standard sr-gnn results done....')
+        pos_weight_sr_gnn_recall_item_dict = read_sr_gnn_results(phase, prefix='pos_node_weight',
+                                                                 adjust_type=adjust_type)
+        print('read pos_weight sr-gnn results done....')
 
-    recall_item_list_dict['sr_gnn_feat_init_v1'] = standard_sr_gnn_recall_item_dict
-    recall_item_list_dict['sr_gnn_pos_weight_v2'] = pos_weight_sr_gnn_recall_item_dict
+        recall_item_list_dict['sr_gnn_feat_init_v1'] = standard_sr_gnn_recall_item_dict
+        recall_item_list_dict['sr_gnn_pos_weight_v2'] = pos_weight_sr_gnn_recall_item_dict
 
     return agg_recall_results(recall_item_list_dict, is_norm=True, ret_type=ret_type)
 
