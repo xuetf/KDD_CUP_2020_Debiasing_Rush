@@ -4,7 +4,7 @@ Track B,
 - ndcg-full: **rank 3rd**（7.277)
 - ndcg-half: **rank 10th** (7.226)
 
-## Key Points of this Solution 
+## Key Points of Our Solution 
 - **The construction of the recall training set**, how to use the ENTIRE data for training is important. we need to prevent data crossing from both the user side and the item side. This improvement is very significant, indicating that the data have a great impact on the results.
 
 - **Improvements in CF methods** can effectively debias the data, including interaction time, direction, content similarity, item popularity, user activity, etc. This improvement is also very significant and suits the topic of the game, i.e., Debiasing.
