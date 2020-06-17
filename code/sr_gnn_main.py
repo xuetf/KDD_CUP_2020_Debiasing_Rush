@@ -65,29 +65,34 @@ def sr_nn_version_2(phase, item_cnt):
     if not os.path.exists(model_path): os.makedirs(model_path)
 
     file_path = '{}/{}/data'.format(sr_gnn_root_dir, phase)
+    sr_gnn_lib_path = 'code/recall/sr_gnn/lib'
     if os.path.exists(model_path):
         print('model_path={} exists, delete'.format(model_path))
         os.system("rm -rf {}".format(model_path))
-    os.system("python3 main.py --task train --node_count {item_cnt} "
+    os.system("python3 {sr_gnn_lib_path}/main.py --task train --node_count {item_cnt} "
               "--checkpoint_path {model_path}/session_id --train_input {file_path}/train_item_seq_enhanced.txt "
               "--test_input {file_path}/test_item_seq.txt --gru_step 2 --epochs 10 "
               "--lr 0.001 --lr_dc 2 --dc_rate 0.1 --early_stop_epoch 3 --hidden_size 256 --batch_size 256 "
               "--max_len 20 --has_uid True --feature_init {file_path}/item_embed_mat.npy --sigma 10 "
-              "--sq_max_len 5 --node_weight True  --node_weight_trainable True".format(item_cnt=item_cnt,
-                                                                                       model_path=model_path,
-                                                                                       file_path=file_path))
+              "--sq_max_len 5 --node_weight True  --node_weight_trainable True".format(
+                                                        sr_gnn_lib_path=sr_gnn_lib_path,
+                                                        item_cnt=item_cnt,
+                                                        model_path=model_path,
+                                                        file_path=file_path))
     # generate rec
     checkpoint_path = find_checkpoint_path(phase, version='v2')
     prefix = 'pos_node_weight_'
 
     rec_path = '{}/{}rec.txt'.format(file_path, prefix)
-    os.system("python3 main.py --task recommend --node_count {item_cnt} --checkpoint_path {checkpoint_path} "
-              "--item_lookup {file_path}/item_lookup.txt --recommend_output {rec_path} "
-              "--session_input {file_path}/test_user_sess.txt --gru_step 2 "
+    sr_gnn_lib_path = 'code/recall/sr_gnn/lib'
+    os.system("python3 {sr_gnn_lib_path}/main.py --task recommend --node_count {item_cnt} "
+              "--checkpoint_path {checkpoint_path} --item_lookup {file_path}/item_lookup.txt "
+              "--recommend_output {rec_path} --session_input {file_path}/test_user_sess.txt --gru_step 2 "
               "--hidden_size 256 --batch_size 256 --rec_extra_count 50 --has_uid True "
               "--feature_init {file_path}/item_embed_mat.npy "
               "--max_len 10 --sigma 10 --sq_max_len 5 --node_weight True "
-              "--node_weight_trainable True".format(item_cnt=item_cnt, checkpoint_path=checkpoint_path,
+              "--node_weight_trainable True".format(sr_gnn_lib_path=sr_gnn_lib_path,
+                                                    item_cnt=item_cnt, checkpoint_path=checkpoint_path,
                                                     file_path=file_path, rec_path=rec_path, ))
 
 
