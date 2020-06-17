@@ -6,10 +6,8 @@ References:
 [2] Gupta P, Garg D, Malhotra P, et al. NISER: Normalized Item and Session Representations with Graph Neural Networks[J]. arXiv preprint arXiv:1909.04276, 2019.
 """
 
-from .construct_sr_gnn_train_data import *
-import sys
+from code.recall import *
 import re
-sys.path.append('lib')
 
 
 def find_checkpoint_path(phase, checkpoint_prefix='session_id', version='v2'):
