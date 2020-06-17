@@ -13,6 +13,9 @@ Track B,
 https://tianchi.aliyun.com/competition/entrance/231785/information
 
 ## Data
+
+Downloading Link: https://pan.baidu.com/s/1P2h7APGUEscdnGlYQpgh-g  password: kilm
+
 Data Fold format
 ```
 |-- data
