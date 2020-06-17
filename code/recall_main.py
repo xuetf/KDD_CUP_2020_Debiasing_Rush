@@ -20,7 +20,16 @@ if __name__ == '__main__':
     total_recom_df = pd.DataFrame()
     phase_full_sim_dict = {}
 
-    recall_methods = {'item-cf', 'bi-graph', 'swing', 'user-cf'}
+    cf_methods = {'item-cf', 'bi-graph', 'swing', 'user-cf'}
+    # setup whether to use multi-processing
+    if is_multi_processing:
+        print('using multi_processing')
+        do_cf_sim_func = get_multi_source_sim_dict_results_multi_processing
+        do_recall_func = do_multi_recall_results_multi_processing
+    else:
+        print('using single_processing')
+        do_cf_sim_func = get_multi_source_sim_dict_results
+        do_recall_func = do_multi_recall_results
 
     for c in range(start_phase, now_phase + 1):
         print('phase:', c)
@@ -30,16 +39,14 @@ if __name__ == '__main__':
         item_cnt_dict = all_click.groupby('item_id')['user_id'].count().to_dict()
         user_cnt_dict = all_click.groupby('user_id')['item_id'].count().to_dict()
 
-        recall_sim_pair_dict = get_multi_source_sim_dict_results_multi_processing(phase_whole_click,
-                                                                                  recall_methods=recall_methods)
+        recall_sim_pair_dict = do_cf_sim_func(phase_whole_click, recall_methods=cf_methods)
 
         user_item_time_dict = get_user_item_time_dict(phase_whole_click, is_drop_duplicated=True)
 
-        recom_df = do_multi_recall_results_multi_processing(recall_sim_pair_dict, user_item_time_dict,
-                                                            target_user_ids=click_q_time['user_id'].unique(), ret_type='df',
-                                                            item_cnt_dict=item_cnt_dict, user_cnt_dict=user_cnt_dict,
-                                                            phase=c, adjust_type='v2',
-                                                            recall_methods=recall_methods | {'sr-gnn'})
+        recom_df = do_recall_func(recall_sim_pair_dict, user_item_time_dict,
+                                  target_user_ids=click_q_time['user_id'].unique(), ret_type='df',
+                                  item_cnt_dict=item_cnt_dict, user_cnt_dict=user_cnt_dict,
+                                  phase=c, adjust_type='v2', recall_methods=cf_methods | {'sr-gnn'})
 
         recom_df['phase'] = c
         total_recom_df = total_recom_df.append(recom_df)
