@@ -1,20 +1,22 @@
 # Solution to Debiasing of KDD CUP 2020 (Team Rush)
-Track B,
 
+We propose a CF + GNN recall approach, as well as an ensemble ranking approach of GBDT and DIN.
+
+## Final Results
+
+Track B,
 - ndcg-full: **rank 3rd**（7.277)
 - ndcg-half: **rank 10th** (7.226)
 
 ## Introduction 
 
-https://tianchi.aliyun.com/competition/entrance/231785/introduction
+https://tianchi.aliyun.com/competition/entrance/231785/information
 
 ## Data
 Data Fold format
 ```
 |-- data
 	|-- underexpose_train
-
-		|-- underexpose_user_feat.csv
 		|-- underexpose_item_feat.csv
 		|-- underexpose_train_click-0.csv
 		|-- underexpose_train_click-1.csv
@@ -35,7 +37,7 @@ Data Fold format
 ```
 
 ## Key Points of Our Solution 
-- **The construction of the recall training set**, how to use the ENTIRE data for training is important. we need to prevent data crossing from both the user side and the item side. This improvement is very significant, indicating that the data have a great impact on the results.
+- **The construction of the recall training set**, how to use the ENTIRE data for training is important. we need to avoid data crossing from both the user side and the item side. This improvement is very significant, indicating that the data have a great impact on the results.
 
 - **Improvements in CF methods** can effectively debias the data, including interaction time, direction, content similarity, item popularity, user activity, etc. This improvement is also very significant and suits the topic of the game, i.e., Debiasing.
 
@@ -63,14 +65,15 @@ Data Fold format
 python 3.6, tensorflow 1.14.0
  
 ## Running
-- ```./run.sh```
+- pipeline: ```./run.sh```
 
-If you just want to do recalls: 
+If you just want to : 
 - sr-gnn recall (single model recall): ```python3 code/sr_gnn_main.py```
-- recall pipeline(CF + read SR-GNN): ```python3 code/recall_main.py```
+- recall pipeline (CF + read SR-GNN): ```python3 code/recall_main.py```
+- ranking pipeline (GBDT + DIN): ```python3 code/rank_main.py``` 
 
 
-The recall code is well checked.
+The recall code and sr-gnn code are well checked.
 The ranking code is not well checked now, we will double-check the code as soon as possible.
  
 ## References
