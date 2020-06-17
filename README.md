@@ -10,18 +10,13 @@ https://tianchi.aliyun.com/competition/entrance/231785/introduction
 
 ## Data
 Data Fold format
-
-``
+```
 |-- data
-
 	|-- underexpose_train
 	
 		|-- underexpose_user_feat.csv
-		
 		|-- underexpose_item_feat.csv
-		
 		|-- underexpose_train_click-0.csv
-		
 		|-- underexpose_train_click-1.csv
 		
 		|-- ...
@@ -43,7 +38,7 @@ Data Fold format
 		|-- underexpose_test_click-9
 			|-- underexpose_test_qtime-9.csv
 			|-- underexpose_test_click-9.csv
-``
+```
 
 ## Key Points of Our Solution 
 - **The construction of the recall training set**, how to use the ENTIRE data for training is important. we need to prevent data crossing from both the user side and the item side. This improvement is very significant, indicating that the data have a great impact on the results.
