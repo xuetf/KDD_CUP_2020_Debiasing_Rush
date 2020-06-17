@@ -1,2 +1,0 @@
-pip install faiss-cpu
-pip install deepctr[gpu]
