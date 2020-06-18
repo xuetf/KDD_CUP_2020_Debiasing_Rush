@@ -20,6 +20,7 @@ https://tianchi.aliyun.com/competition/entrance/231785/information
 ## Data
 
 Downloading Link: https://pan.baidu.com/s/1P2h7APGUEscdnGlYQpgh-g  password: kilm
+Just download the data and override the data directory
 
 Data Fold format
 ```
