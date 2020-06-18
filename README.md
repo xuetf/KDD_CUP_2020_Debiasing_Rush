@@ -1,6 +1,11 @@
 # Solution to Debiasing of KDD CUP 2020 (Team Rush)
 
 We propose a CF + GNN recall approach, as well as an ensemble ranking approach of GBDT and DIN.
+Please refer to the summary of our solution in my blog or zhihu, 
+
+- http://xtf615.com/2020/06/17/KDD-CUP-2020-Debiasing-Rush/
+- https://zhuanlan.zhihu.com/p/149061129
+
 
 ## Final Results
 
@@ -105,6 +110,8 @@ The ranking code is not well checked now, we will double-check the code as soon 
 [10] A Simple Recall Method based on Network-based Inference, score:0.18 (phase0-3), https://tianchi.aliyun.com/forum/postDetail?postId=104936
 
 [11] A library for efficient similarity search and clustering of dense vectors, https://github.com/facebookresearch/faiss
+
+[12] CIKM 2019 tutorial: Learning and Reasoning on Graph for Recommendation, https://next-nus.github.io/
 
     
 
