@@ -100,7 +100,7 @@ if __name__ == '__main__':
     global total_recom_lgb_df
     total_recom_lgb_df = sub2_df(os.path.join(output_path, 'result.csv'))
 
-    today = time.strftime("%Y%m%d")
+    today = '20200617' # time.strftime("%Y%m%d")
     output_ranking_filename = "B-ranking-{}".format(today)
     for i in range(start_phase, now_phase+1):
         print('phase={}'.format(i))
