@@ -250,7 +250,7 @@ def organize_final_train_data_feat(target_phase, is_train_load_from_file=True, s
 
 def infer_process(phase, load_from_file=True, is_use_whole_click=False,
                   is_w2v=True, is_interest=True, word2vec_item_embed_dict=None, prefix=''):
-    all_click, target_infer_user_df = get_phase_click(c)
+    all_click, target_infer_user_df = get_phase_click(phase)
 
     recall_methods = {'item-cf', 'bi-graph', 'user-cf', 'swing'}
     if is_use_whole_click:
