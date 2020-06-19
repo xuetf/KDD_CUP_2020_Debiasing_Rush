@@ -87,7 +87,8 @@ Or if you want to run step by step in Notebook:
 
 Note:
 The recall code and sr-gnn code are well checked. you can run both in py or notebook.
-The ranking code is not well checked now, we will double-check the code as soon as possible.
+~~The ranking code is not well checked now, we will double-check the code as soon as possible.~~
+The ranking code is checked now, you can run both in py or notebook. (2020.06.19)
  
 ## References
 
