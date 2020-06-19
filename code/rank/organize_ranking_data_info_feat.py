@@ -20,7 +20,7 @@ def get_word2vec_feat(full_user_item_df):
     vocab_list = [(k, model.wv[k]) for k, v in model.wv.vocab.items()]
     word2vec_item_embed_dict = dict(vocab_list)
 
-    return word2vec_item_embed_dict, {}
+    return word2vec_item_embed_dict
 
 
 def sparse_feat_fit(total_click):
