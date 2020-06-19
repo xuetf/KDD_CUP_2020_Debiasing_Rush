@@ -1,5 +1,6 @@
 from ..conf import *
 import pandas as pd
+import numpy as np
 
 
 def organize_label_interact_feat_df(click_last_df, click_last_recall_recom_df, phase, is_consider_cold_start=True):
