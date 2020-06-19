@@ -17,7 +17,7 @@ def norm_sim(sim_df, weight=0.0):
 
 
 def ensemble(output_ranking_filename):
-    rank_output_dir = output_path # os.path.join(user_data_dir, 'rank')
+    rank_output_dir = os.path.join(user_data_dir, 'rank')
     # ensemble lgb+din
     lgb_output_file = 'ranker-' + output_ranking_filename + '.csv-pkl'
     # read lgb
