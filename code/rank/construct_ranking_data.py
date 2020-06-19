@@ -26,13 +26,15 @@ def get_history_and_last_click_df(click_df):
 
 def sliding_obtain_training_df(c, is_silding_compute_sim=False):
     print('train_path={}, test_path={}'.format(train_path, test_path))
+    compute_mode = 'once' if not is_silding_compute_sim else 'multi'
+    save_training_path = os.path.join(user_data_dir, 'training', mode, compute_mode, str(c))
+
+    if os.path.exists(os.path.join(save_training_path, 'step_user_recall_item_dict.pkl')):
+        print('phase={} already done...'.format(c))
+        return
 
     all_click, click_q_time = get_phase_click(c)
 
-    # for validation
-    compute_mode = 'once' if not is_silding_compute_sim else 'multi'
-
-    save_training_path = os.path.join(user_data_dir, 'training', mode, compute_mode, str(c))
     click_history_df = all_click
     recall_methods = {'item-cf', 'bi-graph', 'user-cf', 'swing'}
 
