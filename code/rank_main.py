@@ -32,7 +32,9 @@ def ranking_pipeline(target_phase, output_ranking_filename=None, model_names=['r
             online_infer_recall_recom_df['phase'] = target_phase
             total_recom_lgb_df = total_recom_lgb_df.append(online_infer_recall_recom_df)
 
-            result = get_predict(total_recom_lgb_df, 'sim', online_top50_click)
+            _, top50_click = obtain_top_k_click()
+            result = get_predict(total_recom_lgb_df, 'sim', top50_click)
+
             result.to_csv('{}/{}-{}'.format(output_path, output_model_name, output_ranking_filename), index=False,
                           header=None)
             pickle.dump(total_recom_lgb_df,
@@ -98,7 +100,7 @@ if __name__ == '__main__':
     global total_recom_lgb_df
     total_recom_lgb_df = sub2_df(os.path.join(output_path, 'result.csv'))
 
-    today = '20200617'  # time.strftime("%Y%m%d")
+    today = time.strftime("%Y%m%d")
     output_ranking_filename = "B-ranking-{}".format(today)
     for i in range(start_phase, now_phase+1):
         print('phase={}'.format(i))
