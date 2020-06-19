@@ -95,7 +95,7 @@ if __name__ == '__main__':
         glv.set_glv("val_full_df_dict", val_full_df_dict)
 
     global total_recom_lgb_df
-    total_recom_lgb_df = sub2_df(os.path.join(output_path + 'recall_result.csv'))
+    total_recom_lgb_df = sub2_df(os.path.join(output_path, 'result.csv'))
 
     today = time.strftime("%Y%m%d")
     output_ranking_filename = "B-ranking-{}".format(today)
