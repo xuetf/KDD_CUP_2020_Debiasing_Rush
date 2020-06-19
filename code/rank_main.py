@@ -98,7 +98,7 @@ if __name__ == '__main__':
     global total_recom_lgb_df
     total_recom_lgb_df = sub2_df(os.path.join(output_path, 'result.csv'))
 
-    today = time.strftime("%Y%m%d")
+    today = '20190617'  # time.strftime("%Y%m%d")
     output_ranking_filename = "B-ranking-{}".format(today)
     for i in range(start_phase, now_phase+1):
         print('phase={}'.format(i))
@@ -106,8 +106,7 @@ if __name__ == '__main__':
         ranking_pipeline(i, output_ranking_filename + '.csv', model_names=['ranker', 'din'],
                          is_train_load_from_file=True,
                          is_infer_load_from_file=True,
-                         recall_prefix='B-{}-recall_'.format(today),
+                         recall_prefix='B-recall-{}_'.format(today),
                          save_df_prefix='B-{}_'.format(today))
-
     # ensemble lgb+din
     ensemble(output_ranking_filename)
