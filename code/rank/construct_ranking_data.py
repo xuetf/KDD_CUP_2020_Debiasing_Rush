@@ -195,6 +195,7 @@ def organize_train_data_multi_processing(c, is_silding_compute_sim=False, load_f
 
 
 def organize_final_train_data_feat(target_phase, is_train_load_from_file=True, save_df_prefix=''):
+    print('begin obtain final training data...')
     if mode == 'online':
         online_train_full_df_dict = get_glv('online_train_full_df_dict')
     else:
