@@ -318,5 +318,6 @@ def organize_infer_data(target_phase, save_df_prefix, recall_prefix, is_infer_lo
                                                         is_use_whole_click=True,
                                                         prefix=recall_prefix, is_interest=True,
                                                         is_w2v=True, word2vec_item_embed_dict=word2vec_item_embed_dict)
-        pickle.dump([infer_recall_recom_df, infer_df[use_feats]], open(infer_df_path, 'wb'))
+        # too large, not save here
+        # pickle.dump([infer_recall_recom_df, infer_df[use_feats]], open(infer_df_path, 'wb'))
     return infer_recall_recom_df, infer_df
