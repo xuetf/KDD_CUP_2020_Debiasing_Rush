@@ -40,7 +40,7 @@ def ranking_pipeline(target_phase, output_ranking_filename=None, model_names=['r
             result.to_csv('{}/{}-{}'.format(rank_output_dir, output_model_name, output_ranking_filename), index=False,
                           header=None)
             pickle.dump(total_recom_lgb_df,
-                        open("{}/{}-{}-pkl".format(user_data_dir, output_model_name, output_ranking_filename), 'wb'))
+                        open("{}/{}-{}-pkl".format(rank_output_dir, output_model_name, output_ranking_filename), 'wb'))
         print('generate rec result done...')
 
     if 'ranker' in model_names:
@@ -58,8 +58,6 @@ def ranking_pipeline(target_phase, output_ranking_filename=None, model_names=['r
 
 
 if __name__ == '__main__':
-    ensemble('B-ranking-20200617_7_8_9')
-    pass
     glv.init()
     item_feat_df = read_item_feat_df()
     item_content_sim_dict = get_content_sim_item(item_feat_df, topk=200)
@@ -101,9 +99,11 @@ if __name__ == '__main__':
         glv.set_glv("train_full_df_dict", train_full_df_dict)
         glv.set_glv("val_full_df_dict", val_full_df_dict)
 
+    # 4. read recall results
     global total_recom_lgb_df
     total_recom_lgb_df = sub2_df(os.path.join(output_path, 'result.csv'))
 
+    # 5. training+ranking pipeline
     today = time.strftime("%Y%m%d")
     output_ranking_filename = "B-ranking-{}".format(today)
     for i in range(start_phase, now_phase+1):
@@ -114,5 +114,6 @@ if __name__ == '__main__':
                          is_infer_load_from_file=True,
                          recall_prefix='B-recall-{}_'.format(today),
                          save_df_prefix='B-{}_'.format(today))
-    # ensemble lgb+din
+
+    # 6. ensemble lgb+din
     ensemble(output_ranking_filename)
