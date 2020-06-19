@@ -3,7 +3,6 @@ gensim==3.8.3
 faiss_cpu==1.6.3
 lightgbm==2.3.1
 deepctr==0.7.5
-faiss==1.5.3
 scikit_learn==0.23.1
 pandas==0.20.1
 numpy==1.15.4
