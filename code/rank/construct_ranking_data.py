@@ -250,6 +250,8 @@ def organize_final_train_data_feat(target_phase, is_train_load_from_file=True, s
 
 def infer_process(phase, load_from_file=True, is_use_whole_click=False,
                   is_w2v=True, is_interest=True, word2vec_item_embed_dict=None, prefix=''):
+    processed_item_feat_df = get_glv('processed_item_feat_df')
+
     all_click, target_infer_user_df = get_phase_click(phase)
 
     recall_methods = {'item-cf', 'bi-graph', 'user-cf', 'swing'}
@@ -263,8 +265,8 @@ def infer_process(phase, load_from_file=True, is_use_whole_click=False,
         phase_click = all_click
 
     save_training_path = os.path.join(user_data_dir, 'recall', mode)
-    sim_path = os.path.join(save_training_path, prefix + '_phase_{}_sim.pkl'.format(phase))
-    recall_path = os.path.join(save_training_path, prefix + '_phase_{}.pkl'.format(phase))
+    sim_path = os.path.join(save_training_path, prefix + 'phase_{}_sim.pkl'.format(phase))
+    recall_path = os.path.join(save_training_path, prefix + 'phase_{}.pkl'.format(phase))
 
     if load_from_file:
         print('load recall info from file begin, recall_path={}'.format(recall_path))
