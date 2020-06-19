@@ -1,4 +1,4 @@
-# Solution to Debiasing of KDD CUP 2020 (Team Rush)
+# Solution to the Debiasing Track of KDD CUP 2020 (Team Rush)
 
 We propose a CF + GNN recall approach, as well as an ensemble ranking approach of GBDT and DIN.
 Please refer to the summary of our solution in my blog or zhihu, 
@@ -68,7 +68,7 @@ Data Fold format
     - SR-GNN
     
 - Ranking
-    - LGB
+    - GBDT
     - DIN
     
 ## Environment
@@ -115,5 +115,7 @@ The ranking code is not well checked now, we will double-check the code as soon 
 
 [12] CIKM 2019 tutorial: Learning and Reasoning on Graph for Recommendation, https://next-nus.github.io/
 
-    
+[13] Source code and datasets for the paper "Session-based Recommendation with Graph Neural Networks" (AAAI-19), https://github.com/CRIPAC-DIG/SR-GNN
+
+[14] 2019-CIKM挑战赛，超大规模推荐之用户兴趣高效检索赛道, 冠军解决方案: https://github.com/ChuanyuXue/CIKM-2019-AnalytiCup
 
