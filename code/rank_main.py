@@ -35,10 +35,12 @@ def ranking_pipeline(target_phase, output_ranking_filename=None, model_names=['r
             _, top50_click = obtain_top_k_click()
             result = get_predict(total_recom_lgb_df, 'sim', top50_click)
 
-            result.to_csv('{}/{}-{}'.format(output_path, output_model_name, output_ranking_filename), index=False,
+            rank_output_dir = os.path.join(user_data_dir, 'rank')
+            if not os.path.exists(rank_output_dir): os.makedirs(rank_output_dir)
+            result.to_csv('{}/{}-{}'.format(rank_output_dir, output_model_name, output_ranking_filename), index=False,
                           header=None)
             pickle.dump(total_recom_lgb_df,
-                        open("{}/{}-{}-pkl".format(output_path, output_model_name, output_ranking_filename), 'wb'))
+                        open("{}/{}-{}-pkl".format(user_data_dir, output_model_name, output_ranking_filename), 'wb'))
         print('generate rec result done...')
 
     if 'ranker' in model_names:
@@ -56,6 +58,8 @@ def ranking_pipeline(target_phase, output_ranking_filename=None, model_names=['r
 
 
 if __name__ == '__main__':
+    ensemble('B-ranking-20200617_7_8_9')
+    return
     glv.init()
     item_feat_df = read_item_feat_df()
     item_content_sim_dict = get_content_sim_item(item_feat_df, topk=200)

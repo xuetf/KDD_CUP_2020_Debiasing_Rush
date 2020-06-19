@@ -17,17 +17,18 @@ def norm_sim(sim_df, weight=0.0):
 
 
 def ensemble(output_ranking_filename):
+    rank_output_dir = output_path # os.path.join(user_data_dir, 'rank')
     # ensemble lgb+din
-    lgb_output_file = 'ranker-' + output_ranking_filename + '-pkl'
+    lgb_output_file = 'ranker-' + output_ranking_filename + '.csv-pkl'
     # read lgb
     lgb_ranker_df = pickle.load(
-        open('{}/{}'.format(output_path, lgb_output_file), 'rb'))
+        open('{}/{}'.format(rank_output_dir, lgb_output_file), 'rb'))
     lgb_ranker_df['sim'] = lgb_ranker_df.groupby('user_id')['sim'].transform(lambda df: norm_sim(df))
 
     # read din
-    din_output_file = 'din-' + output_ranking_filename + '-pkl'
+    din_output_file = 'din-' + output_ranking_filename + '.csv-pkl'
     din_df = pickle.load(
-        open('{}/{}'.format(output_path, din_output_file), 'rb'))
+        open('{}/{}'.format(rank_output_dir, din_output_file), 'rb'))
     din_df['sim'] = din_df.groupby('user_id')['sim'].transform(lambda df: norm_sim(df))
 
     # fuse lgb and din
