@@ -15,7 +15,7 @@ def get_word2vec_feat(full_user_item_df):
     end_time = time.time()
     run_time = end_time - begin_time
 
-    print('word2vec time：', round(run_time, 2))  # 该循环程序运行时间： 1.4201874732
+    print('word2vec time：', round(run_time, 2))
 
     vocab_list = [(k, model.wv[k]) for k, v in model.wv.vocab.items()]
     word2vec_item_embed_dict = dict(vocab_list)
@@ -44,9 +44,10 @@ def sparse_feat_fit(total_click):
     set_glv('user_raw_id2_idx_dict', user_raw_id2_idx_dict)
 
 
-
-
 def sparse_feat_transform(df):
+    item_raw_id2_idx_dict = get_glv('item_raw_id2_idx_dict')
+    feat_lbe_dict = get_glv('feat_lbe_dict')
+
     df['hist_item_id'] = df['hist_item_id'].apply(lambda seq: [item_raw_id2_idx_dict[str(x)] for x in seq])
 
     for hist_id in var_len_feat:
