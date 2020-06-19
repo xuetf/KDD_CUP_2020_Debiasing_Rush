@@ -59,7 +59,7 @@ def ranking_pipeline(target_phase, output_ranking_filename=None, model_names=['r
 
 if __name__ == '__main__':
     ensemble('B-ranking-20200617_7_8_9')
-    return
+    pass
     glv.init()
     item_feat_df = read_item_feat_df()
     item_content_sim_dict = get_content_sim_item(item_feat_df, topk=200)
