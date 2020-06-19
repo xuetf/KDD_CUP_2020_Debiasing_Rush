@@ -12,6 +12,7 @@ def ranking_pipeline(target_phase, output_ranking_filename=None, model_names=['r
         train_final_df, val_final_df = organize_final_train_data_feat(target_phase, is_train_load_from_file, save_df_prefix)
     else:
         train_final_df = organize_final_train_data_feat(target_phase, is_train_load_from_file, save_df_prefix)
+        val_final_df = None
     print('prepare train data done...')
 
     # load infer
