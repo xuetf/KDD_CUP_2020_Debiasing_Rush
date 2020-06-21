@@ -77,11 +77,11 @@ Our code is well organized. The code package is organized as follows:
 ```
 |-- code
     |-- process/
-		|-- feat_process.py  (item feature processing, read/pre-process/fill in missing items)
-		|-- load_data.py (load origin data, recall training data)
-		|-- recommend_process.py  (generate recommendation results. item-based/user-based/re-rank)
-		|-- convert_data.py  (tools of converting data format)
-		|-- tr_val_split.py (train/validation split)
+        |-- feat_process.py  (item feature processing, read/pre-process/fill in missing items)
+        |-- load_data.py (load origin data, recall training data)
+        |-- recommend_process.py  (generate recommendation results. item-based/user-based/re-rank)
+        |-- convert_data.py  (tools of converting data format)
+        |-- tr_val_split.py (train/validation split)
 		
     |-- recall/
 		|-- item_cf.py
