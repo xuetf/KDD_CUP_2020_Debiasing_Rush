@@ -89,8 +89,8 @@ Our code is well organized. The code package is organized as follows:
         |-- bi_graph.py
         |-- user_cf.py
         |-- cb.py (the content-based similarity computing module using faiss)
-        |-- do_recall.py (wrapper the multi-source recall procedure, single processor)
-        |-- do_recall_multi_processing.py (wrapper the multi-source recall procedure, multiple processors)
+        |-- do_recall.py (wrapp the multi-source recall procedure, single processor)
+        |-- do_recall_multi_processing.py (wrap the multi-source recall procedure, multiple processors)
         |-- sr_gnn/    (sr_gnn recall package)
             |-- construct_sr_gnn_train_data.py (construct sr-gnn training data, get train/validate/test sequences / enhance data)
             |-- read_sr_gnn_results.py (read sr-gnn results from the trained sr-gnn model)
