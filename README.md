@@ -84,17 +84,17 @@ Our code is well organized. The code package is organized as follows:
         |-- tr_val_split.py (train/validation split)
 		
     |-- recall/
-		|-- item_cf.py
-		|-- swing.py
-		|-- bi_graph.py
-		|-- user_cf.py
-		|-- cb.py (the content-based similarity computing module using faiss)
-		|-- do_recall.py (wrapper the multi-source recall procedure, single processor)
-		|-- do_recall_multi_processing.py (wrapper the multi-source recall procedure, multiple processors)
-		|-- sr_gnn/    (sr_gnn recall package)
-		    |-- construct_sr_gnn_train_data.py (construct sr-gnn training data, get train/validate/test sequences / enhance data)
-		    |-- read_sr_gnn_results.py (read sr-gnn results from the trained sr-gnn model)
-		    |-- lib/   (sr-gnn training/recommending library)
+        |-- item_cf.py
+        |-- swing.py
+        |-- bi_graph.py
+        |-- user_cf.py
+        |-- cb.py (the content-based similarity computing module using faiss)
+        |-- do_recall.py (wrapper the multi-source recall procedure, single processor)
+        |-- do_recall_multi_processing.py (wrapper the multi-source recall procedure, multiple processors)
+        |-- sr_gnn/    (sr_gnn recall package)
+            |-- construct_sr_gnn_train_data.py (construct sr-gnn training data, get train/validate/test sequences / enhance data)
+            |-- read_sr_gnn_results.py (read sr-gnn results from the trained sr-gnn model)
+            |-- lib/   (sr-gnn training/recommending library)
 		        
     |-- rank/
         |-- construct_ranking_data.py (construct ranking data for DIN and GBDT)
