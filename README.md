@@ -77,26 +77,25 @@ Our code is well organized. The code package is organized as follows:
 ```
 |-- code
 	|-- process/
-		|-- feat_process.py:  item feature processing, read/pre-process/fill in missing items
-		|-- load_data.py: load origin data, recall training data.
-		|-- recommend_process.py: generate recommendation results. item-based/user-based/re-rank
-		|-- convert_data.py:  tools of converting data format
-		|-- tr_val_split.py: train/validation split
-		
+		|-- feat_process.py  (item feature processing, read/pre-process/fill in missing items)
+		|-- load_data.py (load origin data, recall training data)
+		|-- recommend_process.py  (generate recommendation results. item-based/user-based/re-rank)
+		|-- convert_data.py  (tools of converting data format)
+		|-- tr_val_split.py (train/validation split)
 	|-- recall/
 		|-- item_cf.py
 		|-- swing.py
 		|-- bi_graph.py
 		|-- user_cf.py
-		|-- cb.py (the content-based similarity computing module using faiss)
+	    |-- cb.py (the content-based similarity computing module using faiss)
 		|-- do_recall.py (wrapper the multi-source recall procedure, single processor)
 		|-- do_recall_multi_processing.py (wrapper the multi-source recall procedure, multiple processors)
 		|-- sr_gnn/    (sr_gnn recall package)
 		    |-- construct_sr_gnn_train_data.py (construct sr-gnn training data, get train/validate/test sequences / enhance data)
 		    |-- read_sr_gnn_results.py (read sr-gnn results from the trained sr-gnn model)
 		    |-- lib/   (sr-gnn training/recommending library)
-		    
-    |-- rank/
+		        
+  |-- rank/
         |-- construct_ranking_data.py (construct ranking data for DIN and GBDT)
         |-- organize_ranking_data_label.py (obtain data label, e.g., negative-sampling)
         |-- organize_ranking_data_info_feat.py (extract info feat)
@@ -104,7 +103,6 @@ Our code is well organized. The code package is organized as follows:
         |-- din.py (DIN model)
         |-- lgb.py (GBDT model)
         |-- ensemble.py (ensemble of din and gbdt)
-        
     |-- conf.py (setup the global settings, e.g., mode (online/offline), data directory (online_data/offline_data))
     |-- global_variables.py (global variables shared across multi-modules)
     |-- recall_main.py (wrapper of the multi-source recall pipeline)
