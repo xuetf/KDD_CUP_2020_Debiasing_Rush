@@ -87,7 +87,7 @@ Our code is well organized. The code package is organized as follows:
 		|-- swing.py
 		|-- bi_graph.py
 		|-- user_cf.py
-	    |-- cb.py (the content-based similarity computing module using faiss)
+		|-- cb.py (the content-based similarity computing module using faiss)
 		|-- do_recall.py (wrapper the multi-source recall procedure, single processor)
 		|-- do_recall_multi_processing.py (wrapper the multi-source recall procedure, multiple processors)
 		|-- sr_gnn/    (sr_gnn recall package)
@@ -95,7 +95,7 @@ Our code is well organized. The code package is organized as follows:
 		    |-- read_sr_gnn_results.py (read sr-gnn results from the trained sr-gnn model)
 		    |-- lib/   (sr-gnn training/recommending library)
 		        
-  |-- rank/
+    |-- rank/
         |-- construct_ranking_data.py (construct ranking data for DIN and GBDT)
         |-- organize_ranking_data_label.py (obtain data label, e.g., negative-sampling)
         |-- organize_ranking_data_info_feat.py (extract info feat)
