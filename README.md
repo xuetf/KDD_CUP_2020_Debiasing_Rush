@@ -76,12 +76,13 @@ Our code is well organized. The code package is organized as follows:
 
 ```
 |-- code
-	|-- process/
+    |-- process/
 		|-- feat_process.py  (item feature processing, read/pre-process/fill in missing items)
 		|-- load_data.py (load origin data, recall training data)
 		|-- recommend_process.py  (generate recommendation results. item-based/user-based/re-rank)
 		|-- convert_data.py  (tools of converting data format)
 		|-- tr_val_split.py (train/validation split)
+		
 	|-- recall/
 		|-- item_cf.py
 		|-- swing.py
@@ -103,6 +104,7 @@ Our code is well organized. The code package is organized as follows:
         |-- din.py (DIN model)
         |-- lgb.py (GBDT model)
         |-- ensemble.py (ensemble of din and gbdt)
+        
     |-- conf.py (setup the global settings, e.g., mode (online/offline), data directory (online_data/offline_data))
     |-- global_variables.py (global variables shared across multi-modules)
     |-- recall_main.py (wrapper of the multi-source recall pipeline)
