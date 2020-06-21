@@ -83,7 +83,7 @@ Our code is well organized. The code package is organized as follows:
 		|-- convert_data.py  (tools of converting data format)
 		|-- tr_val_split.py (train/validation split)
 		
-	|-- recall/
+    |-- recall/
 		|-- item_cf.py
 		|-- swing.py
 		|-- bi_graph.py
