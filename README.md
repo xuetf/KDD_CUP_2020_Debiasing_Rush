@@ -70,9 +70,6 @@ Data Fold format
 - Ranking
     - GBDT
     - DIN
-    
-## Environment
-python 3.6, tensorflow 1.14.0
 
 ## Code Preview
 Our code is well organized. The code package is organized as follows:
@@ -115,6 +112,8 @@ Our code is well organized. The code package is organized as follows:
     |-- sr_gnn_main.py (wrapper of the sr-gnn recall pipeline)
 ```
 
+## Environment
+python 3.6, tensorflow 1.14.0
 
 ## Running
 - pipeline: ```./run.sh```
