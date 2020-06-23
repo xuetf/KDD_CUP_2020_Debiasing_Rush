@@ -24,7 +24,7 @@ user_feat_file_path = os.path.join(online_train_path, 'underexpose_user_feat.csv
 
 # recall: global variables to control online or offline
 is_multi_processing = True
-mode = 'online'
+mode = 'offline'
 now_phase = 9
 start_phase = 7
 train_path = online_train_path if mode == 'online' else offline_train_path

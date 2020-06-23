@@ -6,6 +6,14 @@ import code.global_variables as glv
 
 
 if __name__ == '__main__':
+    if mode == 'offline':
+        from code.process.tr_val_split import *
+        from code.process.evaluate import *
+        tr_val_split()
+        print('train/validate split done...')
+        create_answer_file_for_evaluation(output_answer_fname=output_path +'/debias_track_answer.csv')
+        print('create offline eval answer done...')
+
     glv.init()  # init global variable
 
     # obtain content similarity-pairs
@@ -35,13 +43,17 @@ if __name__ == '__main__':
         print('phase:', c)
         all_click, click_q_time = get_phase_click(c)
 
-        phase_whole_click = get_whole_phase_click(all_click, click_q_time)
+        if mode == 'online':
+            phase_click = get_whole_phase_click(all_click, click_q_time)
+        else:
+            phase_click = all_click
+
         item_cnt_dict = all_click.groupby('item_id')['user_id'].count().to_dict()
         user_cnt_dict = all_click.groupby('user_id')['item_id'].count().to_dict()
 
-        recall_sim_pair_dict = do_cf_sim_func(phase_whole_click, recall_methods=cf_methods)
+        recall_sim_pair_dict = do_cf_sim_func(phase_click, recall_methods=cf_methods)
 
-        user_item_time_dict = get_user_item_time_dict(phase_whole_click, is_drop_duplicated=True)
+        user_item_time_dict = get_user_item_time_dict(phase_click, is_drop_duplicated=True)
 
         recom_df = do_recall_func(recall_sim_pair_dict, user_item_time_dict,
                                   target_user_ids=click_q_time['user_id'].unique(), ret_type='df',
@@ -59,3 +71,10 @@ if __name__ == '__main__':
 
     result = get_predict(total_recom_df, 'sim', top50_click)
     result.to_csv(output_path + '/result.csv', index=False, header=None)
+
+    if mode == 'offline':
+        # eval offline
+        evaluate(output_path + '/result.csv',
+                 answer_fname=output_path+'/debias_track_answer.csv')
+
+
