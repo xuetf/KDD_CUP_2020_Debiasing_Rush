@@ -45,6 +45,11 @@ def read_sr_gnn_results(phase, prefix='standard', adjust_type='v2'):
     '''
     print('sr-gnn begin...')
     sr_gnn_rec_path = '{}/{}/{}_rec.txt'.format(sr_gnn_root_dir, phase, prefix)  # standard_rec.txt + pos_node_weight_rec.txt
+
+    if not os.path.exists(sr_gnn_rec_path):
+        sr_gnn_rec_path = '{}/{}/data/{}_rec.txt'.format(sr_gnn_root_dir, phase, prefix)
+
+    print('sr-gnn rec path={}'.format(sr_gnn_rec_path))
     rec_user_item_dict = {}
     with open(sr_gnn_rec_path) as f:
         for line in f:
