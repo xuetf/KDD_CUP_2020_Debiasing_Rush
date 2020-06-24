@@ -108,4 +108,4 @@ if __name__ == '__main__':
     for phase in range(start_phase, now_phase+1):
         print('phase={}'.format(phase))
         sr_nn_version_1(phase, phase_item_cnt_dict[phase])
-        sr_nn_version_2(phase, phase_item_cnt_dict[phase])
+        # sr_nn_version_2(phase, phase_item_cnt_dict[phase])
