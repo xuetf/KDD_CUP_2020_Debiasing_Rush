@@ -102,9 +102,12 @@ def sr_nn_version_2(phase, item_cnt):
 if __name__ == '__main__':
     processed_item_feat_df, item_content_vec_dict = obtain_entire_item_feat_df()
     phase_item_cnt_dict = {}  # 7: 45194, 8: 44979, 9: 44365
+
+    is_use_whole_click = True if mode == 'online' else False  # True if online
     for phase in range(start_phase, now_phase+1):
-        item_cnt = construct_sr_gnn_train_data(phase, item_content_vec_dict, is_use_whole_click=True)
+        item_cnt = construct_sr_gnn_train_data(phase, item_content_vec_dict, is_use_whole_click=is_use_whole_click)
         phase_item_cnt_dict[phase] = item_cnt
+        print('phase={}, item_cnt={}'.format(phase, item_cnt))
     print('construct train data done...')
 
     # running model
