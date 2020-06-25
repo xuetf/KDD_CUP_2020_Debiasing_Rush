@@ -178,7 +178,9 @@ hitrate_50_half=7.448394298553467,
 ndcg_50_half=7.204266548156738
 ```
 
-From the above evaluation, we can see the significant effectiveness of SR-GNN.
+From the above evaluation, we can see the significant effectiveness of SR-GNN. In fact,
+The online submission of single SR-GNN result outperforms Full-CF (i.e., the full-click data enhance SR-GNN more than Full-CF).
+
 You can reproduce these results by modifying the ```mode='offline'``` in code/conf.py
 and run ```python3 code/sr_gnn_main.py``` and ```python3 code/recall_main.py```  in sequence.
 
