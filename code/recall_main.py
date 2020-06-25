@@ -28,7 +28,7 @@ if __name__ == '__main__':
     total_recom_df = pd.DataFrame()
     phase_full_sim_dict = {}
 
-    cf_methods = set() # {'item-cf', 'bi-graph', 'swing', 'user-cf'}
+    cf_methods = {'item-cf', 'bi-graph', 'swing', 'user-cf'}
     # setup whether to use multi-processing
     if is_multi_processing:
         print('using multi_processing')
