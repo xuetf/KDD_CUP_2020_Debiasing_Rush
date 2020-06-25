@@ -132,6 +132,58 @@ The recall code and sr-gnn code are well checked. you can run both in py or note
 ~~The ranking code is not well checked now, we will double-check the code as soon as possible.~~
 
 The ranking code is checked now, you can run both in py or notebook. (2020.06.19)
+
+## Evaluation
+
+We do the offline evaluation for each phase respectively. That is, we use the phase-specific data to do recall/rank for each phase, while we submit the online results using the full click data of all phases.
+In this way, we have observed that there is almost a FIXED gap of ~0.08 between online ndcg-full and offline ndcg-full, ~0.02 between online ndcg-half and offline ndcg-half (we eval and judge in this way). 
+If you use the full click to do offline evaluation, you need to delete the click data occurring in offline answer files from train/test data to avoid leak (we don't eval in this way).
+
+A offline evaluation example to show the effectiveness of SR-GNN：
+- Full CF, recall evaluation:
+```
+current_phase: 9
+phase_id=7, score=[0.05876107 0.06376237 0.133125   0.12718205]
+phase_id=8, score=[0.05402379 0.0609233  0.11375    0.11425062]
+phase_id=9, score=[0.05611179 0.06346961 0.126875   0.13161132]
+score=7.168896675109863,
+hitrate_50_full=7.373749732971191,
+ndcg_50_full=7.168896675109863,
+hitrate_50_half=7.373044013977051,
+ndcg_50_half=7.188154697418213
+```
+
+- SR-GNN, recall evaluation (Better than CF in terms of hitrate-full metrics):
+```
+current_phase: 9
+phase_id=7, score=[0.05882552 0.04997362 0.140625   0.11471321]
+phase_id=8, score=[0.05348391 0.05319532 0.130625   0.11547912]
+phase_id=9, score=[0.05377048 0.0488597  0.134375   0.11562116]
+score=7.166079998016357,
+hitrate_50_full=7.405624866485596,
+ndcg_50_full=7.166079998016357,
+hitrate_50_half=7.345813274383545,
+ndcg_50_half=7.152028560638428
+```
+
+- Full CF + SR-GNN, recall evaluation:
+```
+phase_id=7, score=[0.06840383 0.06921597 0.16125    0.15336658]
+phase_id=8, score=[0.0635776  0.06901148 0.145      0.14250614]
+phase_id=9, score=[0.06315026 0.06603911 0.155      0.15252152]
+score=7.195131778717041,
+hitrate_50_full=7.461250305175781,
+ndcg_50_full=7.195131778717041,
+hitrate_50_half=7.448394298553467,
+ndcg_50_half=7.204266548156738
+```
+
+From the above evaluation, we can see the significant effectiveness of SR-GNN. In fact,
+The online submission of single SR-GNN result outperforms Full-CF (i.e., the full-click data enhance SR-GNN more than Full-CF).
+
+You can reproduce these results by checkout the 'offline' branch by ```git checkout offline```
+and run ```python3 code/sr_gnn_main.py``` and ```python3 code/recall_main.py```  in sequence.
+
  
 ## References
 
