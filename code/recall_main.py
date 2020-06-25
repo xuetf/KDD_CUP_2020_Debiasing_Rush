@@ -28,7 +28,7 @@ if __name__ == '__main__':
     total_recom_df = pd.DataFrame()
     phase_full_sim_dict = {}
 
-    cf_methods = {'item-cf', 'bi-graph', 'swing', 'user-cf'}
+    cf_methods = {} # {'item-cf', 'bi-graph', 'swing', 'user-cf'}
     # setup whether to use multi-processing
     if is_multi_processing:
         print('using multi_processing')
@@ -58,7 +58,7 @@ if __name__ == '__main__':
         recom_df = do_recall_func(recall_sim_pair_dict, user_item_time_dict,
                                   target_user_ids=click_q_time['user_id'].unique(), ret_type='df',
                                   item_cnt_dict=item_cnt_dict, user_cnt_dict=user_cnt_dict,
-                                  phase=c, adjust_type='v2', recall_methods=cf_methods )
+                                  phase=c, adjust_type='v2', recall_methods=cf_methods | {'sr-gnn'})
 
         recom_df['phase'] = c
         total_recom_df = total_recom_df.append(recom_df)
