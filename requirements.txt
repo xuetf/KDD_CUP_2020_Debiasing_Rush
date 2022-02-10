@@ -1,4 +1,4 @@
-tensorflow==1.14.0
+tensorflow==2.5.3
 gensim==3.8.3
 faiss_cpu==1.6.3
 lightgbm==2.3.1
